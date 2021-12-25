@@ -28,7 +28,7 @@ test_that("list_documents() returns an empty list when invalid", {
 test_that("get_document_title() returns presidential document title", {
   html <- get_html(base_uri = './stubs', path = 'document_biden.html', sep = '/')
   result <- get_document_title(html)
-  expect_equal(result, 'Remarks by President-elect Joe Biden in Wilmington, Delaware')
+  expect_equal(result, 'Remarks by President-elect Joe Biden in Wilmington Delaware')
 })
 
 test_that("get_document_date() returns presidential document date", {
@@ -55,15 +55,29 @@ test_that("get_document_citation() returns presidential document citation", {
   expect_equal(str_count(result, "[[:alpha:]]+"), 30)
 })
 
+test_that("get_category() returns first document category", {
+  html <- get_html(base_uri = './stubs', path = 'document_biden_multi_category.html', sep = '/')
+  result <- get_category(html)
+  expect_equal(result, 'Press Office')
+})
+
+test_that("get_location() returns document location", {
+  html <- get_html(base_uri = './stubs', path = 'document_biden_location.html', sep = '/')
+  result <- get_location(html)
+  expect_equal(result, 'Washington DC')
+})
+
 test_that("build_document() returns a document data object", {
   uri = 'document_biden.html'
   html <- get_html(base_uri = './stubs', path = uri, sep = '/')
   document <- build_document(html, uri)
-  expect_equal(document@title, 'Remarks by President-elect Joe Biden in Wilmington, Delaware')
+  expect_equal(document@title, 'Remarks by President-elect Joe Biden in Wilmington Delaware')
   expect_equal(document@date, '2020-12-11T00:00:00+00:00')
   expect_equal(document@president_name, 'Joseph R. Biden')
   expect_equal(str_count(document@content, "[[:alpha:]]+"), 2311)
   expect_equal(str_count(document@citation, "[[:alpha:]]+"), 30)
+  expect_equal(document@category, 'Elections and Transitions')
+  expect_equal(document@location, 'Delaware')
   expect_equal(document@length, 2311)
   expect_equal(document@uri, uri)
 })

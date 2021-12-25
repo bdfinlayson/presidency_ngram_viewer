@@ -81,6 +81,21 @@ get_document_citation <- function(html) {
   return(citation)
 }
 
+get_category <- function(html) {
+  category <- html %>% 
+    html_elements('.group-meta div a') %>% 
+    `[[`(1) %>% 
+    html_text2() %>% 
+    clean()
+}
+
+get_location <- function(html) {
+  location <- html %>% 
+    html_element('.field-spot-state') %>% 
+    html_text2() %>% 
+    clean()
+}
+
 build_document <- function(html, uri) {
   document <- new(
     'document',
@@ -88,6 +103,8 @@ build_document <- function(html, uri) {
     date = get_document_date(html),
     president_name = get_document_president_name(html),
     content = get_document_content(html),
+    category = get_category(html),
+    location = get_location(html),
     citation = get_document_citation(html),
     uri = uri
   )
@@ -106,7 +123,7 @@ presidents_uris <- get_html(path='presidents') %>%
 for(uri in presidents_uris) {
   president <- sapply(str_split(uri, pattern='/'), tail, 1)
   print(c('PREPARING FETCH FOR PRESIDENT: ', president))
- 
+
   csv_name <- str_glue('data', 'presidents_scraped', str_glue(president, 'csv', .sep='.'), .sep='/')
   print(c('PREPARING CSV: ', csv_name))
   data_frame <- data.frame(document_title = character(),
@@ -114,12 +131,14 @@ for(uri in presidents_uris) {
                            president_name = character(),
                            text_content = character(),
                            citation = character(),
+                           category = character(),
+                           location = character(),
                            word_count = integer(),
                            document_uri = character(),
                            stringsAsFactors = FALSE)
   # print(c('INITIALIZING CSV: ', csv_name))
   write.table(data_frame, file = csv_name, sep = ',')
-  
+
   page <- 1
   has_documents <- TRUE
   while (has_documents) {
@@ -129,7 +148,7 @@ for(uri in presidents_uris) {
     print('FETCHING DOCUMENTS...')
     document_uris <- get_html(path=path) %>%
       list_documents()
-    
+
     if(length(document_uris) > 0) {
       for(doc_uri in document_uris) {
         # print(c('FETCHING DOCUMENT: ', str_trim(doc_uri)))
@@ -141,6 +160,8 @@ for(uri in presidents_uris) {
                           document@president_name,
                           document@content,
                           document@citation,
+                          document@category,
+                          document@location,
                           document@length,
                           document@uri)
         write.table(row, file = csv_name, sep = ',', append = TRUE, quote = FALSE, col.names = FALSE, row.names = FALSE)
