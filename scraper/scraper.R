@@ -14,6 +14,15 @@ get_html <-
     return(read_html(url))
   }
 
+clean <- function(text) {
+  cleaned <- text %>% 
+    str_replace_all(',', ' ') %>% 
+    str_trim() %>% 
+    str_squish()
+  return(cleaned)
+}
+
+
 list_presidents <- function(html) {
   links_list <- html %>%
     html_elements(
@@ -36,9 +45,7 @@ get_document_title <- function(html) {
   title <- html %>%
     html_element('.field-ds-doc-title h1') %>%
     html_text2() %>% 
-    str_trim() %>% 
-    str_squish() %>% 
-    str_replace_all('[[:punct:]]', '')
+    clean()
   return(title)
 }
 
@@ -54,9 +61,7 @@ get_document_president_name <- function(html) {
   name <- html %>%
     html_element('.diet-title a') %>%
     html_text2() %>% 
-    str_trim() %>% 
-    str_squish() %>% 
-    str_replace_all('[[:punct:]]', '')
+    clean()
   return(name)
 }
 
@@ -64,9 +69,7 @@ get_document_content <- function(html) {
   content <- html %>%
     html_element('.field-docs-content') %>%
     html_text2() %>% 
-    str_trim() %>% 
-    str_squish() %>% 
-    str_replace_all('[[:punct:]]', '')
+    clean()
   return(content)
 }
 
@@ -74,9 +77,7 @@ get_document_citation <- function(html) {
   citation <- html %>%
     html_element('.ucsbapp_citation') %>%
     html_text2() %>% 
-    str_trim() %>% 
-    str_squish() %>% 
-    str_replace_all('[[:punct:]]', '')
+    clean()
   return(citation)
 }
 
