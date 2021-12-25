@@ -1,6 +1,6 @@
 library(testthat)
 library(stringr)
-source('../scraper.R')
+source('../helpers/scraper_helper.R')
 source('../models/document.R')
 
 test_that("list_presidents() returns list of uris to president pages", {
@@ -55,16 +55,28 @@ test_that("get_document_citation() returns presidential document citation", {
   expect_equal(str_count(result, "[[:alpha:]]+"), 30)
 })
 
-test_that("get_category() returns first document category", {
+test_that("get_categories() returns document categories", {
   html <- get_html(base_uri = './stubs', path = 'document_biden_multi_category.html', sep = '/')
-  result <- get_category(html)
-  expect_equal(result, 'Press Office')
+  result <- get_categories(html)
+  expect_equal(result, 'Press Office;Miscellaneous Press Secretary;Press Releases')
+})
+
+test_that("get_categories() returns empty string when no document categories present", {
+  html <- get_html(base_uri = './stubs', path = 'document_biden_no_categories.html', sep = '/')
+  result <- get_categories(html)
+  expect_equal(result, '')
 })
 
 test_that("get_location() returns document location", {
   html <- get_html(base_uri = './stubs', path = 'document_biden_location.html', sep = '/')
   result <- get_location(html)
   expect_equal(result, 'Washington DC')
+})
+
+test_that("get_location() returns empty string when no document location present", {
+  html <- get_html(base_uri = './stubs', path = 'document_biden_location_na.html', sep = '/')
+  result <- get_location(html)
+  expect_equal(result, '')
 })
 
 test_that("build_document() returns a document data object", {
@@ -76,8 +88,8 @@ test_that("build_document() returns a document data object", {
   expect_equal(document@president_name, 'Joseph R. Biden')
   expect_equal(str_count(document@content, "[[:alpha:]]+"), 2311)
   expect_equal(str_count(document@citation, "[[:alpha:]]+"), 30)
-  expect_equal(document@category, 'Elections and Transitions')
+  expect_equal(document@categories, 'Elections and Transitions;President-elect;Spoken Addresses and Remarks;Transition Documents')
   expect_equal(document@location, 'Delaware')
-  expect_equal(document@length, 2311)
+  expect_equal(document@word_count, 2311)
   expect_equal(document@uri, uri)
 })

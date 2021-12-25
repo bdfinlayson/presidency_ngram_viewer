@@ -5,8 +5,8 @@ setClass('document',
            president_name='character',
            content='character',
            citation='character',
-           category='character',
+           categories='character',
            location='character',
-           length='numeric',
+           word_count='numeric',
            uri='character'
          ))
