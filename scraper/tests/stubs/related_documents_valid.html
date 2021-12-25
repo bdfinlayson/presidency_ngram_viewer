@@ -1,0 +1,917 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
+  "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html lang="en" dir="ltr" prefix="content: http://purl.org/rss/1.0/modules/content/ dc: http://purl.org/dc/terms/ foaf: http://xmlns.com/foaf/0.1/ og: http://ogp.me/ns# rdfs: http://www.w3.org/2000/01/rdf-schema# sioc: http://rdfs.org/sioc/ns# sioct: http://rdfs.org/sioc/types# skos: http://www.w3.org/2004/02/skos/core# xsd: http://www.w3.org/2001/XMLSchema#">
+<head profile="http://www.w3.org/1999/xhtml/vocab">
+  <meta charset="utf-8"><script type="text/javascript">(window.NREUM||(NREUM={})).init={ajax:{deny_list:["bam-cell.nr-data.net"]}};(window.NREUM||(NREUM={})).loader_config={licenseKey:"dee899de70",applicationID:"80106271"};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var i=e[n]={exports:{}};t[n][0].call(i.exports,function(e){var i=t[n][1][e];return r(i||e)},i,i.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<n.length;i++)r(n[i]);return r}({1:[function(t,e,n){function r(){}function i(t,e,n,r){return function(){return s.recordSupportability("API/"+e+"/called"),o(t+e,[u.now()].concat(c(arguments)),n?null:this,r),n?void 0:this}}var o=t("handle"),a=t(10),c=t(11),f=t("ee").get("tracer"),u=t("loader"),s=t(4),d=NREUM;"undefined"==typeof window.newrelic&&(newrelic=d);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],l="api-",v=l+"ixn-";a(p,function(t,e){d[e]=i(l,e,!0,"api")}),d.addPageAction=i(l,"addPageAction",!0),d.setCurrentRouteName=i(l,"routeName",!0),e.exports=newrelic,d.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(t,e){var n={},r=this,i="function"==typeof e;return o(v+"tracer",[u.now(),t,n],r),function(){if(f.emit((i?"":"no-")+"fn-start",[u.now(),r,i],n),i)try{return e.apply(this,arguments)}catch(t){throw f.emit("fn-err",[arguments,this,t],n),t}finally{f.emit("fn-end",[u.now()],n)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(t,e){m[e]=i(v,e)}),newrelic.noticeError=function(t,e){"string"==typeof t&&(t=new Error(t)),s.recordSupportability("API/noticeError/called"),o("err",[t,u.now(),!1,e])}},{}],2:[function(t,e,n){function r(t){if(NREUM.init){for(var e=NREUM.init,n=t.split("."),r=0;r<n.length-1;r++)if(e=e[n[r]],"object"!=typeof e)return;return e=e[n[n.length-1]]}}e.exports={getConfiguration:r}},{}],3:[function(t,e,n){var r=!1;try{var i=Object.defineProperty({},"passive",{get:function(){r=!0}});window.addEventListener("testPassive",null,i),window.removeEventListener("testPassive",null,i)}catch(o){}e.exports=function(t){return r?{passive:!0,capture:!!t}:!!t}},{}],4:[function(t,e,n){function r(t,e){var n=[a,t,{name:t},e];return o("storeMetric",n,null,"api"),n}function i(t,e){var n=[c,t,{name:t},e];return o("storeEventMetrics",n,null,"api"),n}var o=t("handle"),a="sm",c="cm";e.exports={constants:{SUPPORTABILITY_METRIC:a,CUSTOM_METRIC:c},recordSupportability:r,recordCustom:i}},{}],5:[function(t,e,n){function r(){return c.exists&&performance.now?Math.round(performance.now()):(o=Math.max((new Date).getTime(),o))-a}function i(){return o}var o=(new Date).getTime(),a=o,c=t(12);e.exports=r,e.exports.offset=a,e.exports.getLastTimestamp=i},{}],6:[function(t,e,n){function r(t){return!(!t||!t.protocol||"file:"===t.protocol)}e.exports=r},{}],7:[function(t,e,n){function r(t,e){var n=t.getEntries();n.forEach(function(t){"first-paint"===t.name?p("timing",["fp",Math.floor(t.startTime)]):"first-contentful-paint"===t.name&&p("timing",["fcp",Math.floor(t.startTime)])})}function i(t,e){var n=t.getEntries();if(n.length>0){var r=n[n.length-1];if(f&&f<r.startTime)return;p("lcp",[r])}}function o(t){t.getEntries().forEach(function(t){t.hadRecentInput||p("cls",[t])})}function a(t){if(t instanceof g&&!y){var e=Math.round(t.timeStamp),n={type:t.type};e<=l.now()?n.fid=l.now()-e:e>l.offset&&e<=Date.now()?(e-=l.offset,n.fid=l.now()-e):e=l.now(),y=!0,p("timing",["fi",e,n])}}function c(t){"hidden"===t&&(f=l.now(),p("pageHide",[f]))}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var f,u,s,d,p=t("handle"),l=t("loader"),v=t(9),m=t(3),g=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){u=new PerformanceObserver(r);try{u.observe({entryTypes:["paint"]})}catch(h){}s=new PerformanceObserver(i);try{s.observe({entryTypes:["largest-contentful-paint"]})}catch(h){}d=new PerformanceObserver(o);try{d.observe({type:"layout-shift",buffered:!0})}catch(h){}}if("addEventListener"in document){var y=!1,w=["click","keydown","mousedown","pointerdown","touchstart"];w.forEach(function(t){document.addEventListener(t,a,m(!1))})}v(c)}},{}],8:[function(t,e,n){function r(t,e){if(!i)return!1;if(t!==i)return!1;if(!e)return!0;if(!o)return!1;for(var n=o.split("."),r=e.split("."),a=0;a<r.length;a++)if(r[a]!==n[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var c=navigator.userAgent,f=c.match(a);f&&c.indexOf("Chrome")===-1&&c.indexOf("Chromium")===-1&&(i="Safari",o=f[1])}e.exports={agent:i,version:o,match:r}},{}],9:[function(t,e,n){function r(t){function e(){t(c&&document[c]?document[c]:document[o]?"hidden":"visible")}"addEventListener"in document&&a&&document.addEventListener(a,e,i(!1))}var i=t(3);e.exports=r;var o,a,c;"undefined"!=typeof document.hidden?(o="hidden",a="visibilitychange",c="visibilityState"):"undefined"!=typeof document.msHidden?(o="msHidden",a="msvisibilitychange"):"undefined"!=typeof document.webkitHidden&&(o="webkitHidden",a="webkitvisibilitychange",c="webkitVisibilityState")},{}],10:[function(t,e,n){function r(t,e){var n=[],r="",o=0;for(r in t)i.call(t,r)&&(n[o]=e(r,t[r]),o+=1);return n}var i=Object.prototype.hasOwnProperty;e.exports=r},{}],11:[function(t,e,n){function r(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,i=n-e||0,o=Array(i<0?0:i);++r<i;)o[r]=t[e+r];return o}e.exports=r},{}],12:[function(t,e,n){e.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(t,e,n){function r(){}function i(t){function e(t){return t&&t instanceof r?t:t?u(t,f,a):a()}function n(n,r,i,o,a){if(a!==!1&&(a=!0),!l.aborted||o){t&&a&&t(n,r,i);for(var c=e(i),f=m(n),u=f.length,s=0;s<u;s++)f[s].apply(c,r);var p=d[w[n]];return p&&p.push([b,n,r,c]),c}}function o(t,e){y[t]=m(t).concat(e)}function v(t,e){var n=y[t];if(n)for(var r=0;r<n.length;r++)n[r]===e&&n.splice(r,1)}function m(t){return y[t]||[]}function g(t){return p[t]=p[t]||i(n)}function h(t,e){l.aborted||s(t,function(t,n){e=e||"feature",w[n]=e,e in d||(d[e]=[])})}var y={},w={},b={on:o,addEventListener:o,removeEventListener:v,emit:n,get:g,listeners:m,context:e,buffer:h,abort:c,aborted:!1};return b}function o(t){return u(t,f,a)}function a(){return new r}function c(){(d.api||d.feature)&&(l.aborted=!0,d=l.backlog={})}var f="nr@context",u=t("gos"),s=t(10),d={},p={},l=e.exports=i();e.exports.getOrSetContext=o,l.backlog=d},{}],gos:[function(t,e,n){function r(t,e,n){if(i.call(t,e))return t[e];var r=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return t[e]=r,r}var i=Object.prototype.hasOwnProperty;e.exports=r},{}],handle:[function(t,e,n){function r(t,e,n,r){i.buffer([t],r),i.emit(t,e,n)}var i=t("ee").get("handle");e.exports=r,r.ee=i},{}],id:[function(t,e,n){function r(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:a(t,o,function(){return i++})}var i=1,o="nr@id",a=t("gos");e.exports=r},{}],loader:[function(t,e,n){function r(){if(!T++){var t=P.info=NREUM.info,e=g.getElementsByTagName("script")[0];if(setTimeout(u.abort,3e4),!(t&&t.licenseKey&&t.applicationID&&e))return u.abort();f(O,function(e,n){t[e]||(t[e]=n)});var n=a();c("mark",["onload",n+P.offset],null,"api"),c("timing",["load",n]);var r=g.createElement("script");0===t.agent.indexOf("http://")||0===t.agent.indexOf("https://")?r.src=t.agent:r.src=v+"://"+t.agent,e.parentNode.insertBefore(r,e)}}function i(){"complete"===g.readyState&&o()}function o(){c("mark",["domContent",a()+P.offset],null,"api")}var a=t(5),c=t("handle"),f=t(10),u=t("ee"),s=t(8),d=t(6),p=t(2),l=t(3),v=p.getConfiguration("ssl")===!1?"http":"https",m=window,g=m.document,h="addEventListener",y="attachEvent",w=m.XMLHttpRequest,b=w&&w.prototype,E=!d(m.location);NREUM.o={ST:setTimeout,SI:m.setImmediate,CT:clearTimeout,XHR:w,REQ:m.Request,EV:m.Event,PR:m.Promise,MO:m.MutationObserver};var x=""+location,O={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1212.min.js"},M=w&&b&&b[h]&&!/CriOS/.test(navigator.userAgent),P=e.exports={offset:a.getLastTimestamp(),now:a,origin:x,features:{},xhrWrappable:M,userAgent:s,disabled:E};if(!E){t(1),t(7),g[h]?(g[h]("DOMContentLoaded",o,l(!1)),m[h]("load",r,l(!1))):(g[y]("onreadystatechange",i),m[y]("onload",r)),c("mark",["firstbyte",a.getLastTimestamp()],null,"api");var T=0}},{}],"wrap-function":[function(t,e,n){function r(t,e){function n(e,n,r,f,u){function nrWrapper(){var o,a,s,p;try{a=this,o=d(arguments),s="function"==typeof r?r(o,a):r||{}}catch(l){i([l,"",[o,a,f],s],t)}c(n+"start",[o,a,f],s,u);try{return p=e.apply(a,o)}catch(v){throw c(n+"err",[o,a,v],s,u),v}finally{c(n+"end",[o,a,p],s,u)}}return a(e)?e:(n||(n=""),nrWrapper[p]=e,o(e,nrWrapper,t),nrWrapper)}function r(t,e,r,i,o){r||(r="");var c,f,u,s="-"===r.charAt(0);for(u=0;u<e.length;u++)f=e[u],c=t[f],a(c)||(t[f]=n(c,s?f+r:r,i,f,o))}function c(n,r,o,a){if(!v||e){var c=v;v=!0;try{t.emit(n,r,o,e,a)}catch(f){i([f,n,r,o],t)}v=c}}return t||(t=s),n.inPlace=r,n.flag=p,n}function i(t,e){e||(e=s);try{e.emit("internal-error",t)}catch(n){}}function o(t,e,n){if(Object.defineProperty&&Object.keys)try{var r=Object.keys(t);return r.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(o){i([o],n)}for(var a in t)l.call(t,a)&&(e[a]=t[a]);return e}function a(t){return!(t&&t instanceof Function&&t.apply&&!t[p])}function c(t,e){var n=e(t);return n[p]=t,o(t,n,s),n}function f(t,e,n){var r=t[e];t[e]=c(r,n)}function u(){for(var t=arguments.length,e=new Array(t),n=0;n<t;++n)e[n]=arguments[n];return e}var s=t("ee"),d=t(11),p="nr@original",l=Object.prototype.hasOwnProperty,v=!1;e.exports=r,e.exports.wrapFunction=c,e.exports.wrapInPlace=f,e.exports.argsToArray=u},{}]},{},["loader"]);</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Generator" content="Drupal 7 (http://drupal.org)" />
+<link rel="canonical" href="/people/president/joseph-r-biden" />
+<link rel="shortlink" href="/node/200320" />
+<link rel="shortcut icon" href="https://www.presidency.ucsb.edu/sites/default/files/favicon-app_0.png" type="image/png" />
+  <title>Joseph R. Biden | The American Presidency Project</title>
+  <link href='//fonts.googleapis.com/css?family=Open+Sans:400,400italic,800,700,600,300|Dosis:400,200,300,500,600,700,800' rel='stylesheet' type='text/css'>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="https://www.presidency.ucsb.edu/sites/default/files/css/css_lQaZfjVpwP_oGNqdtWCSpJT1EMqXdMiU84ekLLxQnc4.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://www.presidency.ucsb.edu/sites/default/files/css/css_mYX-LIOky8FYFaNbVXROeK1zvNeJONS8NAoDGq4dBHI.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://www.presidency.ucsb.edu/sites/default/files/css/css_Cq1R3m_ERXC2ynYnp57HZ-O7ehprd9pvLTuV32DY_ow.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://www.presidency.ucsb.edu/sites/default/files/css/css_rSQFFfhgRJzGFfW0daS6ZK63sOQRV3kJbjkJYD6QIk4.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://www.presidency.ucsb.edu/sites/default/files/css/css_gsVew5cLoW8YoOz5wlq-MSojac7Ph5f6cujHg4HQfcM.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://www.presidency.ucsb.edu/sites/default/files/css/css_DW59q6nX-P3-D4cA08_V2iLlMJIaFdPFYT8X6nSFpV8.css" media="print" />
+  <!-- HTML5 element support for IE6-8 -->
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.2.min.js"></script>
+<script>window.jQuery || document.write("<script src='/sites/default/modules/contrib/jquery_update/replace/jquery/1.11/jquery.min.js'>\x3C/script>")</script>
+<script src="https://www.presidency.ucsb.edu/sites/default/files/js/js_38VWQ3jjQx0wRFj7gkntZr077GgJoGn5nv3v05IeLLo.js"></script>
+<script src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.11.4/jquery-ui.min.js"></script>
+<script>window.jQuery.ui || document.write("<script src='/sites/default/modules/contrib/jquery_update/replace/ui/ui/minified/jquery-ui.min.js'>\x3C/script>")</script>
+<script src="https://www.presidency.ucsb.edu/sites/default/files/js/js_L44M4fcmrBRcElq-dmjTX3qz4sTIb_MwGOvg6Wukx74.js"></script>
+<script src="https://www.presidency.ucsb.edu/sites/default/files/js/js_VZL0UXqdpOFyg2uWvKrVmzXaidr3Z4rgbynAUpc_Uns.js"></script>
+<script>(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-86410002-1", {"cookieDomain":"auto","allowLinker":true});ga("require", "linker");ga("linker:autoLink", ["dev-wwwpresidencyucsbedu.pantheonsite.io","www.presidency.ucsb.edu"]);ga("set", "anonymizeIp", true);ga("send", "pageview");</script>
+<script src="https://www.presidency.ucsb.edu/sites/default/files/js/js_ahDNmhCJDgu1bKOy0e6J85gf8NfeuYLDbC39ZCgHTkg.js"></script>
+<script src="https://www.presidency.ucsb.edu/sites/default/files/js/js_gvpxcPEErmaiJn8qGSGx2O87lReivTR09hs10gIG3Yg.js"></script>
+<script src="https://www.presidency.ucsb.edu/sites/default/files/js/js_mBQQnv2jfT7hV2YFgICrM1KFECoRoI4UlzREm5pJWyg.js"></script>
+<script>jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"app","theme_token":"zsZhVBxQEqo5J5VRraM0fwtWB62L7r2QehTZnHelmdk","jquery_version":"1.11","js":{"sites\/default\/libraries\/jquery-ui-multiselect-widget\/src\/jquery.multiselect.js":1,"sites\/default\/libraries\/jquery-ui-multiselect-widget\/src\/jquery.multiselect.filter.js":1,"sites\/default\/modules\/contrib\/jquery_ui_multiselect_widget\/jquery_ui_multiselect_widget.js":1,"modules\/statistics\/statistics.js":1,"sites\/default\/themes\/bootstrap\/js\/bootstrap.js":1,"\/\/ajax.aspnetcdn.com\/ajax\/jQuery\/jquery-1.11.2.min.js":1,"0":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery-html-prefilter-3.5.0-backport.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"\/\/ajax.aspnetcdn.com\/ajax\/jquery.ui\/1.11.4\/jquery-ui.min.js":1,"1":1,"sites\/default\/modules\/contrib\/jquery_update\/replace\/ui\/external\/jquery.cookie.js":1,"sites\/default\/modules\/contrib\/jquery_update\/replace\/jquery.form\/4\/jquery.form.min.js":1,"sites\/default\/modules\/custom\/udb\/includes\/expiredStorage\/expired_storage.js":1,"sites\/default\/modules\/custom\/udb\/includes\/jspanel\/jspanel.min.js":1,"sites\/default\/modules\/custom\/udb\/includes\/jspanel\/extensions\/modal\/jspanel.modal.min.js":1,"misc\/ajax.js":1,"sites\/default\/modules\/contrib\/jquery_update\/js\/jquery_update.js":1,"sites\/default\/modules\/contrib\/views\/js\/base.js":1,"sites\/default\/themes\/bootstrap\/js\/misc\/_progress.js":1,"sites\/default\/modules\/contrib\/views\/js\/ajax_view.js":1,"sites\/default\/modules\/contrib\/google_analytics\/googleanalytics.js":1,"2":1,"sites\/default\/modules\/custom\/udb\/includes\/udb.behaviors.js":1,"sites\/default\/modules\/contrib\/field_group\/field_group.js":1,"sites\/default\/themes\/app\/bootstrap\/js\/affix.js":1,"sites\/default\/themes\/app\/bootstrap\/js\/alert.js":1,"sites\/default\/themes\/app\/bootstrap\/js\/button.js":1,"sites\/default\/themes\/app\/bootstrap\/js\/carousel.js":1,"sites\/default\/themes\/app\/bootstrap\/js\/collapse.js":1,"sites\/default\/themes\/app\/bootstrap\/js\/dropdown.js":1,"sites\/default\/themes\/app\/bootstrap\/js\/modal.js":1,"sites\/default\/themes\/app\/bootstrap\/js\/tooltip.js":1,"sites\/default\/themes\/app\/bootstrap\/js\/popover.js":1,"sites\/default\/themes\/app\/bootstrap\/js\/scrollspy.js":1,"sites\/default\/themes\/app\/bootstrap\/js\/tab.js":1,"sites\/default\/themes\/app\/bootstrap\/js\/transition.js":1,"sites\/default\/themes\/app\/scripts\/scripts.js":1,"sites\/default\/themes\/bootstrap\/js\/misc\/ajax.js":1,"sites\/default\/themes\/bootstrap\/js\/modules\/views\/js\/ajax_view.js":1},"css":{"modules\/system\/system.base.css":1,"misc\/ui\/jquery.ui.core.css":1,"misc\/ui\/jquery.ui.theme.css":1,"misc\/ui\/jquery.ui.accordion.css":1,"sites\/default\/modules\/custom\/udb\/includes\/jspanel\/jspanel.min.css":1,"sites\/default\/modules\/custom\/udb\/includes\/theme\/udb-popup-default.css":1,"sites\/default\/modules\/contrib\/date\/date_api\/date.css":1,"sites\/default\/modules\/contrib\/date\/date_popup\/themes\/datepicker.1.7.css":1,"sites\/default\/modules\/contrib\/date\/date_repeat_field\/date_repeat_field.css":1,"modules\/field\/theme\/field.css":1,"modules\/node\/node.css":1,"sites\/default\/modules\/contrib\/extlink\/extlink.css":1,"sites\/default\/modules\/contrib\/views\/css\/views.css":1,"sites\/default\/modules\/contrib\/ctools\/css\/ctools.css":1,"sites\/default\/libraries\/jquery-ui-multiselect-widget\/jquery.multiselect.css":1,"sites\/default\/libraries\/jquery-ui-multiselect-widget\/jquery.multiselect.filter.css":1,"sites\/default\/modules\/contrib\/jquery_ui_multiselect_widget\/jquery_ui_multiselect_widget.css":1,"sites\/default\/themes\/app\/css\/style.css":1,"sites\/default\/themes\/app\/css\/oog.css":1,"sites\/default\/themes\/app\/css\/print.css":1}},"jquery_ui_multiselect_widget":{"module_path":"sites\/default\/modules\/contrib\/jquery_ui_multiselect_widget","multiple":1,"filter":1,"subselector":"#edit-category2","selectedlist":"4","autoOpen":0,"header":1,"height":"auto","classes":"app-uberselect","filter_auto_reset":1,"filter_width":"auto","jquery_ui_multiselect_widget_path_match_exclude":"admin\/*\r\nmedia\/*\r\nfile\/*\r\nsystem\/ajax"},"better_exposed_filters":{"views":{"more_resources_blk":{"displays":{"block":{"filters":[]}}},"related_documents":{"displays":{"block_1":{"filters":[]}}},"presidents":{"displays":{"block_1":{"filters":[]},"block_2":{"filters":[]}}}}},"views":{"ajax_path":"\/views\/ajax","ajaxViews":{"views_dom_id:cf972200b7ec3a328f6592afbc6a9859":{"view_name":"related_documents","view_display_id":"block_1","view_args":"200320","view_path":"node\/200320","view_base_path":"related-documents","view_dom_id":"cf972200b7ec3a328f6592afbc6a9859","pager_element":0},"views_dom_id:ff856926081d5786e851650a35a5ffcb":{"view_name":"presidents","view_display_id":"block_1","view_args":"","view_path":"node\/200301","view_base_path":"presidents","view_dom_id":"ff856926081d5786e851650a35a5ffcb","pager_element":0},"views_dom_id:9d87af1194c414e3d6b095a3b6a429e7":{"view_name":"presidents","view_display_id":"block_2","view_args":"","view_path":"node\/200301","view_base_path":"presidents","view_dom_id":"9d87af1194c414e3d6b095a3b6a429e7","pager_element":0}}},"urlIsAjaxTrusted":{"\/views\/ajax":true},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip","trackDomainMode":2,"trackCrossDomains":["dev-wwwpresidencyucsbedu.pantheonsite.io","www.presidency.ucsb.edu"]},"udb":{"popup_title":"       We need your help!","popup_donation_message":"\u003Ch3 style=\u0022text-align: center;\u0022\u003EWe\u0026#39;re sorry to disrupt your visit!\u003Cbr \/\u003E\u003Cem\u003EBUT\u003C\/em\u003E:\u0026nbsp; \u003Cfont color=\u0022#1B83C3\u0022\u003EWe need *your* support in order to keep providing\u003C\/font\u003E\u003Cbr \/\u003E\u003Cem\u003EThe American Presidency Project\u003C\/em\u003E as a free resource.\u003Cbr \/\u003EPlease make a tax-deductible gift!\u0026nbsp; It\u0026#39;s for a good cause!\u003Cbr \/\u003E\u003Cstrong\u003E\u003Cspan style=\u0022font-size:14pt\u0022\u003E\u003Cspan style=\u0022font-family:\u0026quot;Calibri\u0026quot;,sans-serif\u0022\u003E--\u0026gt; \u003Cem\u003EYour gift keeps the APP operating.\u003C\/em\u003E \u0026lt;-- \u003C\/span\u003E\u003C\/span\u003E\u003C\/strong\u003E\u003Cbr \/\u003E\u003Cstrong\u003E\u003Ca href=\u0022https:\/\/giving.ucsb.edu\/Funds\/Give?id=185\u0026amp;utm_source=organic\u0026amp;utm_medium=www.presidency.ucsb.edu\/people\/president\/joseph-r-biden\u0026amp;utm_campaign=\u0026amp;utm_content=\u0022 id=\u0022udb_ucsb_giving_platform_web_link\u0022 rel=\u0022nofollow\u0022\u003EGIVE NOW\u003C\/a\u003E \u003Csection id=\u0022udb_visitor_optout_container\u0022\u003E\n  \u003Cinput type=\u0022checkbox\u0022 id=\u0022udb_visitor_optout\u0022 name=\u0022udb_visitor_optout\u0022\u003E\n  \u003Clabel for=\u0022udb_visitor_optout\u0022\u003Edismiss for 30 days\u003C\/label\u003E\n\u003C\/section\u003E\u003C\/strong\u003E\u003C\/h3\u003E","optout_duration":30,"cooldown_interval":10,"max_donation_requests_per_day":5,"titlebar_bgcolor":"#418dbf","titlebar_fgcolor":"#FFFFFF","content_bgcolor":"#FFFFFF","content_fgcolor":"#FF0000","popup_type":"standard","content_text_size":"3"},"statistics":{"data":{"nid":"200320"},"url":"\/modules\/statistics\/statistics.php"},"field_group":{"div":"full"},"bootstrap":{"anchorsFix":1,"anchorsSmoothScrolling":1,"formHasError":1,"popoverEnabled":0,"popoverOptions":{"animation":1,"html":0,"placement":"right","selector":"","trigger":"click","triggerAutoclose":1,"title":"","content":"","delay":0,"container":"body"},"tooltipEnabled":1,"tooltipOptions":{"animation":1,"html":0,"placement":"auto left","selector":"","trigger":"hover focus","delay":0,"container":"body"}}});</script>
+</head>
+<body class="html not-front not-logged-in one-sidebar sidebar-first page-node page-node- page-node-200320 node-type-prez-diet" >
+  <div id="skip-link">
+    <a href="#main-content" class="element-invisible element-focusable">Skip to main content</a>
+  </div>
+    <div class="wrapper"> <!-- Wrapper for Sticky Footer -->
+
+      <div class="branding-region">
+      <div class="container">
+                  <div class="region region-branding">
+    <section id="block-block-1" class="block block-block site-title-block clearfix">
+
+      
+  <div class="site-title"><a href="https://www.presidency.ucsb.edu/">The American Presidency Project</a></div>
+
+</section>
+<section id="block-block-2" class="block block-block top-link-buttons clearfix">
+
+      
+  <p><a class="btn btn-default" href="https://www.presidency.ucsb.edu/about">About</a><a class="btn btn-default" href="/advanced-search"><span class="glyphicon glyphicon-search"></span> Search</a></p>
+<p id="ucScript"><a href="https://www.ucsb.edu/" target="_blank"><img alt="ucsb wordmark black" src="https://www.presidency.ucsb.edu/sites/default/files/pictures/uc_santa_barbara_wordmark_black_rgb.svg" style="width: 175px; height: 13px;" /></a></p>
+
+</section>
+  </div>
+      </div>
+    </div>
+  
+  <div id="navbar" role="banner" class="navbar navbar-default"><!-- Only way to remove "container" class -->
+    <div class="container">
+      <div class="navbar-header">
+
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+
+              <div class="navbar-collapse collapse">
+          <nav role="navigation">
+                          <ul class="menu nav navbar-nav"><li class="first expanded dropdown"><a href="/documents" class="dropdown-toggle" data-toggle="dropdown">Documents <span class="caret"></span></a><ul class="dropdown-menu"><li class="first leaf"><a href="/documents/presidential-documents-archive-guidebook">Guidebook</a></li>
+<li class="last leaf"><a href="/documents/category-attributes">Category Attributes</a></li>
+</ul></li>
+<li class="collapsed"><a href="/statistics">Statistics</a></li>
+<li class="leaf"><a href="/media" title="">Media Archive</a></li>
+<li class="leaf"><a href="/presidents" title="">Presidents</a></li>
+<li class="leaf"><a href="/analyses" title="">Analyses</a></li>
+<li class="last leaf"><a href="https://giving.ucsb.edu/Funds/Give?id=185" title="">GIVE</a></li>
+</ul>                                              </nav>
+        </div>
+          </div>
+  </div>
+
+  <div role="banner" id="page-header" class="site-header">
+      </div>
+
+  <div class="main-container container">
+    <div class="row">
+
+          <aside class="col-sm-3 no-print" role="complementary">
+            <div class="region region-sidebar-first well">
+    <section id="block-views-presidents-block-1" class="block block-views standard-frontpage-block clearfix">
+
+        <h2 class="block-title">Presidents</h2>
+    
+  <div class="view view-presidents view-id-presidents view-display-id-block_1 view-dom-id-ff856926081d5786e851650a35a5ffcb">
+        
+    
+      <div class="view-content">
+        <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/joseph-r-biden">Joseph R. Biden</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/donald-j-trump" class="active">Donald J. Trump</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/barack-obama">Barack Obama</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/george-w-bush">George W. Bush</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/william-j-clinton">William J. Clinton</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/george-bush">George Bush</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/ronald-reagan">Ronald Reagan</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/jimmy-carter">Jimmy Carter</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/gerald-r-ford">Gerald R. Ford</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/richard-nixon">Richard Nixon</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/lyndon-b-johnson">Lyndon B. Johnson</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/john-f-kennedy">John F. Kennedy</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/dwight-d-eisenhower">Dwight D. Eisenhower</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/harry-s-truman">Harry S. Truman</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/franklin-d-roosevelt">Franklin D. Roosevelt</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/herbert-hoover">Herbert Hoover</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/calvin-coolidge">Calvin Coolidge</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/warren-g-harding">Warren G. Harding</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/woodrow-wilson">Woodrow Wilson</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/william-howard-taft">William Howard Taft</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/theodore-roosevelt">Theodore Roosevelt</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/william-mckinley">William McKinley</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/grover-cleveland-0">Grover Cleveland</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/benjamin-harrison">Benjamin Harrison</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/grover-cleveland">Grover Cleveland</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/chester-arthur">Chester A. Arthur</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/james-garfield">James A. Garfield</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/rutherford-b-hayes">Rutherford B. Hayes</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/ulysses-s-grant">Ulysses S. Grant</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/andrew-johnson">Andrew Johnson</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/abraham-lincoln">Abraham Lincoln</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/james-buchanan">James Buchanan</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/franklin-pierce">Franklin Pierce</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/millard-fillmore">Millard Fillmore</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/zachary-taylor">Zachary Taylor</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/james-k-polk">James K. Polk</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/john-tyler">John Tyler</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/william-henry-harrison">William Henry Harrison</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/martin-van-buren">Martin van Buren</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/andrew-jackson">Andrew Jackson</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/john-quincy-adams">John Quincy Adams</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/james-monroe">James Monroe</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/james-madison">James Madison</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/thomas-jefferson">Thomas Jefferson</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/john-adams">John Adams</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/president/george-washington">George Washington</a></span>  </div>  </div>
+    </div>
+  
+  
+  
+  
+  
+  
+</div>
+</section>
+<section id="block-views-presidents-block-2" class="block block-views standard-frontpage-block clearfix">
+
+        <h2 class="block-title">Non-President</h2>
+    
+  <div class="view view-presidents view-id-presidents view-display-id-block_2 view-dom-id-9d87af1194c414e3d6b095a3b6a429e7">
+        
+    
+      <div class="view-content">
+        <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/adlai-stevenson">Adlai Stevenson</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/al-smith">Al Smith</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/albert-gore-jr">Albert Gore, Jr.</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/alf-landon">Alf Landon</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/alton-b-parker">Alton B. Parker</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/ari-fleischer">Ari Fleischer</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/barry-goldwater">Barry Goldwater</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/ben-carson">Ben Carson</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/bernie-sanders">Bernie Sanders</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/bill-richardson">Bill Richardson</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/bobby-jindal">Bobby Jindal</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/burton-k-wheeler">Burton K. Wheeler</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/carly-fiorina">Carly Fiorina</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/charles-e-hughes">Charles E. Hughes</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/charles-mcnary">Charles McNary</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/chris-christie">Chris Christie</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/christopher-dodd">Christopher Dodd</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/dana-perino">Dana Perino</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/democratic-party-platforms">Democratic Party Platforms</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/doug-emhoff">Doug Emhoff</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/fred-thompson">Fred Thompson</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/gary-johnson">Gary Johnson</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/george-mcgovern">George McGovern</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/george-pataki">George Pataki</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/george-wallace">George Wallace</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/gretchen-whitmer">Gretchen Whitmer</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/h-ross-perot">H. Ross Perot</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/herman-cain">Herman Cain</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/hillary-clinton">Hillary Clinton</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/hubert-h-humphrey">Hubert H. Humphrey</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/jack-kemp">Jack Kemp</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/james-m-cox">James M. Cox</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/jay-carney">Jay Carney</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/jeb-bush">Jeb Bush</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/jen-psaki">Jen Psaki</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/jill-biden">Jill Biden</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/jim-webb">Jim Webb</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/joe-kennedy-iii">Joe Kennedy III</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/john-anderson">John Anderson</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/john-edwards">John Edwards</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/john-f-kerry">John F. Kerry</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/john-kasich">John Kasich</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/john-mccain">John McCain</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/john-sparkman">John Sparkman</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/john-w-davis">John W. Davis</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/jon-huntsman">Jon Huntsman</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/joseph-lieberman">Joseph Lieberman</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/josh-earnest">Josh Earnest</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/kamala-harris">Kamala Harris</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/karen-pence">Karen Pence</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/kayleigh-mcenany">Kayleigh McEnany</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/laura-bush">Laura Bush</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/lincoln-chafee">Lincoln Chafee</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/lindsey-graham">Lindsey Graham</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/marco-rubio">Marco Rubio</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/martin-omalley">Martin O&#039;Malley</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/melania-trump">Melania Trump</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/michael-s-dukakis">Michael S. Dukakis</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/michele-bachmann">Michele Bachmann</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/michelle-obama">Michelle Obama</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/mike-huckabee">Mike Huckabee</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/mike-pence">Mike Pence</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/minorthird-party-platforms">Minor/Third Party Platforms</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/mitt-romney">Mitt Romney</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/newt-gingrich">Newt Gingrich</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/patrick-j-buchanan">Patrick J. Buchanan</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/paul-ryan">Paul Ryan</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/presidential-candidate-debates">Presidential Candidate Debates</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/ralph-nader">Ralph Nader</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/rand-paul">Rand Paul</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/rebuttal-speech">Rebuttal Speech</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/republican-party-platforms">Republican Party Platforms</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/richard-b-cheney">Richard B. Cheney</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/rick-perry">Rick Perry</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/rick-santorum">Rick Santorum</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/robert-dole">Robert Dole</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/robert-gibbs">Robert Gibbs</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/robert-m-la-follette">Robert M. La Follette</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/ron-paul">Ron Paul</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/rudy-giuliani">Rudy Giuliani</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/sarah-palin">Sarah Palin</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/sarah-sanders">Sarah Sanders</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/scott-mcclellan">Scott McClellan</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/scott-walker">Scott Walker</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/sean-spicer">Sean Spicer</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/stacey-abrams">Stacey Abrams</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/stephanie-grisham">Stephanie Grisham</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/strom-thurmond">Strom Thurmond</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/ted-cruz">Ted Cruz</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/thomas-dewey">Thomas Dewey</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/tim-kaine">Tim Kaine</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/tim-pawlenty">Tim Pawlenty</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/tony-snow">Tony Snow</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/us-congress">U.S. Congress</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/veronica-escobar">Veronica Escobar</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/walter-f-mondale">Walter F. Mondale</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/wendell-willkie">Wendell Willkie</a></span>  </div>  </div>
+  <div>
+      
+  <div>        <span class="otherBlock"><a href="/people/other/william-jennings-bryan">William Jennings Bryan</a></span>  </div>  </div>
+    </div>
+  
+  
+  
+  
+  
+  
+</div>
+</section>
+  </div>
+        </aside>  <!-- /#sidebar-first -->
+      
+      <section class="col-sm-9">
+                        <a id="main-content"></a>
+                
+                          
+                          <div class="region region-content">
+    <section id="block-system-main" class="block block-system clearfix">
+
+      
+  
+
+<div  about="/people/president/joseph-r-biden" typeof="sioc:Item foaf:Document" class="node node-prez-diet view-mode-full ">
+
+
+<div class="row">
+<div class="col-sm-4 ">
+
+  <div class="field-diet-pictures">
+    <img typeof="foaf:Image" class="img-responsive" src="https://www.presidency.ucsb.edu/sites/default/files/people/joseph-r-biden.jpg" width="800" height="1000" alt="Photo of Joe Biden" />  </div>
+</div>
+
+<div class="col-sm-8 ">
+
+  <div class="field-title">
+    <h1>Joseph R. Biden</h1>  </div>
+<div class="label-above">Dates In Office:&nbsp;</div><div class="f-item"><span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2021-01-20T12:00:00+00:00">January 20, 2021</span></div><div class="label-above">Age in Office:&nbsp;</div><div class="f-item">78</div><div class="label-above">Birth - Death:&nbsp;</div><div class="f-item"><span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="1942-11-20T00:00:00+00:00">November 20, 1942</span></div><div class="label-above">Party:&nbsp;</div><div class="f-item">Democratic</div><div class="label-above">Location Born:&nbsp;</div><div class="f-item">Pennsylvania</div><div class="label-above">Office:&nbsp;</div><div class="f-item">President of the United States</div><div class="label-above">Religion:&nbsp;</div><div class="f-item">Roman Catholic</div></div>
+
+</div>
+</div>
+
+
+
+</section>
+<section id="block-views-related-documents-block-1" class="block block-views clearfix">
+
+        <h2 class="block-title">Related Documents</h2>
+    
+  <div class="view view-related-documents view-id-related_documents view-display-id-block_1 view-dom-id-cf972200b7ec3a328f6592afbc6a9859">
+            <div class="view-header">
+
+      <p><a href="/advanced-search">Search all documents</a></p>
+
+    </div>
+    
+  
+    
+      <div class="view-content">
+        <div class="views-row views-row-1 views-row-odd views-row-first">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-01-31T00:00:00+00:00">January 31, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/press-release-senator-joe-biden-announces-campaign-for-president-the-united-states">Press Release - Senator Joe Biden Announces Campaign For President of the United States</a></span>  </div>  </div>
+  <div class="views-row views-row-2 views-row-even">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-02-05T00:00:00+00:00">February 05, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/remarks-the-senate-floor-the-bipartisan-iraq-war-resolution">Remarks on the Senate Floor on the Bipartisan Iraq War Resolution</a></span>  </div>  </div>
+  <div class="views-row views-row-3 views-row-odd">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-02-15T00:00:00+00:00">February 15, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/remarks-the-brookings-institution-iraqs-future-and-americas-interests">Remarks at the Brookings Institution on Iraq&#039;s Future and America&#039;s Interests</a></span>  </div>  </div>
+  <div class="views-row views-row-4 views-row-even">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-02-21T00:00:00+00:00">February 21, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/press-release-senator-biden-participates-democratic-presidential-forum-nevada">Press Release - Senator Biden Participates in Democratic Presidential Forum in Nevada</a></span>  </div>  </div>
+  <div class="views-row views-row-5 views-row-odd">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-02-22T00:00:00+00:00">February 22, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/press-release-biden-receives-glowing-reviews-afscme-forum">Press Release - Biden Receives Glowing Reviews at AFSCME Forum</a></span>  </div>  </div>
+  <div class="views-row views-row-6 views-row-even">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-02-26T00:00:00+00:00">February 26, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/press-release-senator-joe-biden-make-campaign-stops-new-hampshire">Press Release - Senator Joe Biden to Make Campaign Stops in New Hampshire</a></span>  </div>  </div>
+  <div class="views-row views-row-7 views-row-odd">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-02-28T00:00:00+00:00">February 28, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/press-release-biden-holds-first-series-town-hall-meetings-iraq-during-trip-new-hampshire">Press Release - Biden Holds First in Series of Town Hall Meetings on Iraq During Trip to New Hampshire</a></span>  </div>  </div>
+  <div class="views-row views-row-8 views-row-even">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-02-28T00:00:00+00:00">February 28, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/press-release-senator-joe-biden-make-campaign-stops-south-carolina-0">Press Release - Senator Joe Biden to Make Campaign Stops in South Carolina</a></span>  </div>  </div>
+  <div class="views-row views-row-9 views-row-odd">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-03-05T00:00:00+00:00">March 05, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/press-release-senator-joe-biden-receives-major-endorsements-from-prominent-elected">Press Release - Senator Joe Biden Receives Major Endorsements From Prominent Elected Officials in South Carolina</a></span>  </div>  </div>
+  <div class="views-row views-row-10 views-row-even">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-03-06T00:00:00+00:00">March 06, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/press-release-biden-campaign-announces-key-endorsements-south-carolina">Press Release - Biden Campaign Announces Key Endorsements in South Carolina</a></span>  </div>  </div>
+  <div class="views-row views-row-11 views-row-odd">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-03-07T00:00:00+00:00">March 07, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/press-release-senator-joe-biden-make-campaign-stops-iowa-0">Press Release - Senator Joe Biden to Make Campaign Stops in Iowa</a></span>  </div>  </div>
+  <div class="views-row views-row-12 views-row-even">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-03-08T00:00:00+00:00">March 08, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/opening-statement-the-senate-foreign-relations-committee-hearing-afghanistan">Opening Statement in the Senate Foreign Relations Committee Hearing on Afghanistan</a></span>  </div>  </div>
+  <div class="views-row views-row-13 views-row-odd">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-03-08T00:00:00+00:00">March 08, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/statement-senator-joe-biden-the-senate-joint-resolution-iraq">Statement by Senator Joe Biden on the Senate Joint Resolution on Iraq</a></span>  </div>  </div>
+  <div class="views-row views-row-14 views-row-even">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-03-13T00:00:00+00:00">March 13, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/press-release-biden-launches-new-website-and-online-petition-pressure-president-change">Press Release - Biden Launches New Website And Online Petition to Pressure President to Change Course in Iraq</a></span>  </div>  </div>
+  <div class="views-row views-row-15 views-row-odd">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-03-15T00:00:00+00:00">March 15, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/press-release-biden-bill-hire-50000-more-cops-nationwide-unanimoulsy-passes-judiciary">Press Release - Biden Bill to Hire 50,000 More Cops Nationwide Unanimoulsy Passes Judiciary Committee</a></span>  </div>  </div>
+  <div class="views-row views-row-16 views-row-even">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-03-16T00:00:00+00:00">March 16, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/statement-senator-joe-biden-attorney-general-gonzales">Statement by Senator Joe Biden on Attorney General Gonzales</a></span>  </div>  </div>
+  <div class="views-row views-row-17 views-row-odd">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-03-19T00:00:00+00:00">March 19, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/press-release-senator-joe-biden-make-campaign-stops-carson-city">Press Release - Senator Joe Biden to Make Campaign Stops in Carson City</a></span>  </div>  </div>
+  <div class="views-row views-row-18 views-row-even">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-03-22T00:00:00+00:00">March 22, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/press-release-biden-advocates-more-funding-for-armored-vehicles">Press Release - Biden Advocates More Funding For Armored Vehicles</a></span>  </div>  </div>
+  <div class="views-row views-row-19 views-row-odd">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-03-22T00:00:00+00:00">March 22, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/statement-senator-joe-biden-calls-white-house-officials-testify-under-oath-reiterates-call">Statement by Senator Joe Biden: Calls on White House Officials to Testify Under Oath; Reiterates Call For Gonzales&#039;...</a></span>  </div>  </div>
+  <div class="views-row views-row-20 views-row-even">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-03-22T00:00:00+00:00">March 22, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/statement-senator-joe-biden-elizabeth-edwards">Statement by Senator Joe Biden on Elizabeth Edwards</a></span>  </div>  </div>
+  <div class="views-row views-row-21 views-row-odd">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-03-23T00:00:00+00:00">March 23, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/press-release-biden-continues-fight-for-law-enforcement">Press Release - Biden Continues Fight For Law Enforcement</a></span>  </div>  </div>
+  <div class="views-row views-row-22 views-row-even">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-03-28T00:00:00+00:00">March 28, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/press-release-biden-lugar-resolution-calling-for-american-leadership-climate-change-passes">Press Release - Biden-Lugar Resolution Calling For American Leadership on Climate Change Passes Senate Foreign Relations...</a></span>  </div>  </div>
+  <div class="views-row views-row-23 views-row-odd">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-03-28T00:00:00+00:00">March 28, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/press-release-senator-joe-biden-make-campaign-stops-south-carolina">Press Release - Senator Joe Biden to Make Campaign Stops in South Carolina</a></span>  </div>  </div>
+  <div class="views-row views-row-24 views-row-even">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-03-29T00:00:00+00:00">March 29, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/press-release-biden-campaign-announces-early-iowa-organization">Press Release - Biden Campaign Announces Early Iowa Organization</a></span>  </div>  </div>
+  <div class="views-row views-row-25 views-row-odd">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-03-29T00:00:00+00:00">March 29, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/press-release-senator-joe-bidens-son-delaware-attorney-general-beau-biden-campaign-iowa">Press Release - Senator Joe Biden&#039;s Son Delaware Attorney General Beau Biden to Campaign in Iowa This Weekend</a></span>  </div>  </div>
+  <div class="views-row views-row-26 views-row-even">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-03-30T00:00:00+00:00">March 30, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/press-release-biden-campaign-announces-key-staff-nevada">Press Release - Biden Campaign Announces Key Staff in Nevada</a></span>  </div>  </div>
+  <div class="views-row views-row-27 views-row-odd">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-04-02T00:00:00+00:00">April 02, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/press-release-senator-joe-biden-make-campaign-stops-iowa">Press Release - Senator Joe Biden to Make Campaign Stops in Iowa</a></span>  </div>  </div>
+  <div class="views-row views-row-28 views-row-even">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-04-03T00:00:00+00:00">April 03, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/remarks-the-drake-university-school-law">Remarks at the Drake University School of Law</a></span>  </div>  </div>
+  <div class="views-row views-row-29 views-row-odd">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-04-03T00:00:00+00:00">April 03, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/press-release-biden-condemns-bush-administration-abuse-power">Press Release - Biden Condemns Bush Administration Abuse of Power</a></span>  </div>  </div>
+  <div class="views-row views-row-30 views-row-even">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-04-04T00:00:00+00:00">April 04, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/press-release-biden-campaign-announces-endorsements-iowa">Press Release - Biden Campaign Announces Endorsements in Iowa</a></span>  </div>  </div>
+  <div class="views-row views-row-31 views-row-odd">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-04-04T00:00:00+00:00">April 04, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/statement-senator-joe-biden-bush-veto-threat">Statement by Senator Joe Biden on Bush Veto Threat</a></span>  </div>  </div>
+  <div class="views-row views-row-32 views-row-even">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-04-04T00:00:00+00:00">April 04, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/statement-senator-joe-biden-irans-release-british-hostages">Statement by Senator Joe Biden on Iran&#039;s Release of British Hostages</a></span>  </div>  </div>
+  <div class="views-row views-row-33 views-row-odd">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-04-05T00:00:00+00:00">April 05, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/press-release-biden-campaign-announces-political-staff">Press Release - Biden Campaign Announces Political Staff</a></span>  </div>  </div>
+  <div class="views-row views-row-34 views-row-even">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-04-10T00:00:00+00:00">April 10, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/press-release-senator-joe-biden-make-campaign-stops-new-hampshire-0">Press Release - Senator Joe Biden to Make Campaign Stops in New Hampshire</a></span>  </div>  </div>
+  <div class="views-row views-row-35 views-row-odd views-row-last">
+      
+          
+  <div class="field-docs-start-date-time">
+    <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2007-04-11T00:00:00+00:00">April 11, 2007</span>  </div>
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/documents/statement-senator-joe-biden-defense-departments-decision-extend-tours-duty-iraq">Statement by Senator Joe Biden on Defense Department&#039;s Decision to Extend Tours of Duty in Iraq</a></span>  </div>  </div>
+    </div>
+  
+      <div class="text-center"><ul class="pagination"><li class="active"><span>1</span></li>
+<li><a title="Go to page 2" href="/people/president/joseph-r-biden?page=1">2</a></li>
+<li><a title="Go to page 3" href="/people/president/joseph-r-biden?page=2">3</a></li>
+<li><a title="Go to page 4" href="/people/president/joseph-r-biden?page=3">4</a></li>
+<li><a title="Go to page 5" href="/people/president/joseph-r-biden?page=4">5</a></li>
+<li><a title="Go to page 6" href="/people/president/joseph-r-biden?page=5">6</a></li>
+<li><a title="Go to page 7" href="/people/president/joseph-r-biden?page=6">7</a></li>
+<li><a title="Go to page 8" href="/people/president/joseph-r-biden?page=7">8</a></li>
+<li><a title="Go to page 9" href="/people/president/joseph-r-biden?page=8">9</a></li>
+<li class="pager-ellipsis disabled"><span>…</span></li>
+<li class="next"><a title="Go to next page" href="/people/president/joseph-r-biden?page=1">next ›</a></li>
+<li class="pager-last"><a title="Go to last page" href="/people/president/joseph-r-biden?page=139">last »</a></li>
+</ul></div>  
+  
+  
+  
+  
+</div>
+</section>
+  </div>
+<!-- Content -->
+      </section>
+
+      
+    </div>
+  </div>
+  
+  
+</div>
+<footer class="site-footer no-print">
+  <div class="container">
+      <div class="region region-footer">
+    <section id="block-block-4" class="block block-block attribution clearfix">
+
+      
+  <p><span>The American Presidency Project</span><br />John Woolley and Gerhard Peters<br /><strong><a href="https://www.presidency.ucsb.edu/contact">Contact</a></strong></p>
+
+</section>
+<section id="block-block-6" class="block block-block foot ucsb clearfix">
+
+      
+  <p style="text-align: center;display:inline-block;"><a class="twitter" href="https://twitter.com/presidency_proj" target="_blank">Twitter</a> <a class="facebook" href="https://www.facebook.com/pg/american.presidency.project/" target="_blank">Facebook</a></p>
+
+</section>
+<section id="block-block-5" class="block block-block copyright clearfix">
+
+      
+  <p>Copyright &copy; The American Presidency Project<br /><a href="http://www.ucsb.edu/terms-of-use" target="_blank">Terms of Service</a> | <a href="http://www.policy.ucsb.edu/privacy-notification/" target="_blank">Privacy</a> | <a href="/accessibility">Accessibility</a></p><p><img alt="uc santa barbara logo" src="/sites/default/files/pictures/uc-santa-barbara-wordmark-white1x.svg" style="width: 197px; min-width: 150px; height: 14px;object-fit:cover;" /></p>
+</section>
+  </div>
+  </div>
+  </footer>
+  <script src="https://www.presidency.ucsb.edu/sites/default/files/js/js_NKBfN5q_T2fdeVG6tE3pdNU7glYkyzgPuDTc4K3Ne1w.js"></script>
+<script src="https://www.presidency.ucsb.edu/sites/default/files/js/js_MRdvkC2u4oGsp5wVxBG1pGV5NrCPW3mssHxIn6G9tGE.js"></script>
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam-cell.nr-data.net","licenseKey":"dee899de70","applicationID":"80106271","transactionName":"bl1XYxNYWkVYVxFdWVcXdFQVUFtYFlAWa1NBTEdWEmZaWV1ROkRXXl1qQQhcQw==","queueTime":0,"applicationTime":422,"atts":"QhpUFVtCSUs=","errorBeacon":"bam-cell.nr-data.net","agent":""}</script></body>
+</html>

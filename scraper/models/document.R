@@ -1,0 +1,10 @@
+setClass('document',
+         slots=list(
+           title='character',
+           date='character',
+           president_name='character',
+           content='character',
+           citation='character',
+           length='numeric',
+           uri='character'
+         ))
