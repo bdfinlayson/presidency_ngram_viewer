@@ -10,6 +10,8 @@ library(stringr)
 file_paths <- dir_ls(path = '../data/presidents_scraped')
 
 test_file <- '../data/presidents_scraped/zachary-taylor.csv'
+test_file_2 <- '../data/presidents_scraped/james-garfield.csv'
+test_files <- c(test_file, test_file_2)
 
 corpus_df <- read_csv(test_file)
 
@@ -27,15 +29,18 @@ setClass(
 
 
 # initialize new text_collocations_set obj which will be used to track totals across an individual president's corpuses
-ngrams_df <- tibble(
-  ngram = character(),
-  year = character(),
-  count = numeric(),
-  volume = numeric(),
-  presidents = character(),
-  categories = character(),
-  document_uris = character()
-)
+build_ngram_df <- function() {
+  tibble(
+    ngram = character(),
+    year = character(),
+    count = numeric(),
+    volume = numeric(),
+    presidents = character(),
+    categories = character(),
+    document_uris = character()
+  )
+}
+
 
 # iterate through each row of the df and tokenize the text content
 get_ngrams <- function(row) {
@@ -51,10 +56,11 @@ get_document_year <- function(date_string) {
 }
 
 merge_values <- function(existing_values, new_values) {
-  existing_values_list <- str_split(existing_values, pattern = ';')
-  new_values_list <- str_split(new_values, pattern = ';')
+  existing_values_list <-
+    str_split(existing_values, pattern = ';')[[1]]
+  new_values_list <- str_split(new_values, pattern = ';')[[1]]
   merged_values <-
-    union(existing_values_list, new_values_list)[[1]] %>%
+    union(existing_values_list, new_values_list) %>%
     str_flatten(';')
   return(merged_values)
 }
@@ -69,23 +75,50 @@ update_or_create_ngram <- function(ng, target_df, source_df_row) {
     filter(target_df, ngram == ng, year == document_year)
   has_ngram <- nrow(existing_ngram) > 0
   if (has_ngram) {
-    print(c('updating ngram', ng))
+    print(
+      c(
+        'UPDATING ngram',
+        ng,
+        'for year',
+        document_year,
+        'for presidents',
+        existing_ngram$presidents
+      )
+    )
     # ensure volume indicator only gets incremented when new document is detected
-    is_new_document <- str_detect(existing_ngram$document_uris, source_df_row$document_uri)
+    is_new_document <-
+      str_detect(existing_ngram$document_uris,
+                 source_df_row$document_uri)
     target_df <- rows_update(
       target_df,
       tibble(
-        volume = if(is_new_document) existing_ngram$volume + 1 else existing_ngram$volume,
+        volume = if (is_new_document)
+          existing_ngram$volume + 1
+        else
+          existing_ngram$volume,
         ngram = existing_ngram$ngram,
+        year = existing_ngram$year,
         count = existing_ngram$count + 1,
         categories = merge_values(existing_ngram$categories, source_df_row$categories),
         presidents = merge_values(existing_ngram$presidents, source_df_row$president_name),
-        document_uris = merge_values(existing_ngram$document_uris, source_df_row$document_uri)
+        document_uris = merge_values(
+          existing_ngram$document_uris,
+          source_df_row$document_uri
+        )
       ),
-      by = 'ngram'
+      by = c('ngram', 'year')
     )
   } else {
-    print(c('adding ngram', ng))
+    print(
+      c(
+        'ADDING ngram',
+        ng,
+        'for year',
+        document_year,
+        'for president',
+        source_df_row$president_name
+      )
+    )
     target_df <- rows_insert(
       target_df,
       tibble(
@@ -96,7 +129,8 @@ update_or_create_ngram <- function(ng, target_df, source_df_row) {
         presidents = source_df_row$president_name,
         categories = source_df_row$categories,
         document_uris = source_df_row$document_uri
-      )
+      ),
+      by = c('ngram', 'year')
     )
   }
   return(target_df)
@@ -105,24 +139,36 @@ update_or_create_ngram <- function(ng, target_df, source_df_row) {
 normalize <- function(ngram) {
   ngram %>%
     tolower() %>%
-    str_replace_all('[^A-Za-z0-9]', ' ') %>%
+    str_replace_all("[^A-Za-z0-9']", ' ') %>%
     str_trim() %>%
     str_squish()
 }
 
-foreach(row = iter(corpus_df, by = 'row')) %do% {
-  ngrams <- get_ngrams(row)
-  for (ngram in ngrams[[1]]) {
-    # skip ngram if ngram length is one character
-    if (nchar(ngram) == 1) {
-      print(c("ngram too short, skipping...", ngram))
-      next
+itemize_ngrams_for_presidential_documents <-
+  function(file_path, corpus_df, ngram_df) {
+    foreach(row = iter(corpus_df, by = 'row')) %do% {
+      ngrams <- get_ngrams(row)
+      for (ngram in ngrams[[1]]) {
+        # skip ngram if ngram length is less than three characters
+        if (nchar(ngram) < 3) {
+          print(c("ngram too short, skipping...", ngram))
+          next
+        }
+        # normalize ngram by lowercasing, removing special characters and extra whitespace
+        normalized_ngram <- normalize(ngram)
+        ngram_df <-
+          update_or_create_ngram(normalized_ngram, ngram_df, row)
+      }
     }
-    # normalize ngram by lowercasing, removing special characters and extra whitespace
-    normalized_ngram <- normalize(ngram)
-    ngrams_df <-
-      update_or_create_ngram(normalized_ngram, ngrams_df, row)
+    return(ngram_df)
   }
-}
 
-head(ngrams_df)
+ngram_df <- build_ngram_df()
+
+for (file_path in test_files) {
+  corpus_df <- read_csv(file_path) %>%
+    arrange(document_date)
+  ngram_df <-
+    itemize_ngrams_for_presidential_documents(path, corpus_df, ngram_df)
+  write_csv(ngram_df, '../data/presidents_ngram/ngrams.csv')
+}
