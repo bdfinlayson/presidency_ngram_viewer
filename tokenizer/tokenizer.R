@@ -11,7 +11,7 @@ file_paths <- dir_ls(path = '../data/presidents_scraped')
 
 test_file <- '../data/presidents_scraped/zachary-taylor.csv'
 test_file_2 <- '../data/presidents_scraped/james-garfield.csv'
-test_files <- c(test_file, test_file_2)
+test_file_paths <- c(test_file, test_file_2)
 
 corpus_df <- read_csv(test_file)
 
@@ -165,7 +165,7 @@ itemize_ngrams_for_presidential_documents <-
 
 ngram_df <- build_ngram_df()
 
-for (file_path in test_files) {
+for (file_path in file_paths) {
   corpus_df <- read_csv(file_path) %>%
     arrange(document_date)
   ngram_df <-
