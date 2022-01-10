@@ -15,9 +15,9 @@ source('./helpers/database_helper.R')
 # get presidential corpus data file paths
 file_paths <- dir_ls(path = '../data/presidents_scraped')
 
-# test_file <- '../data/presidents_scraped/zachary-taylor.csv'
-# test_file_2 <- '../data/presidents_scraped/james-garfield.csv'
-# test_file_paths <- c(test_file, test_file_2)
+test_file <- '../data/presidents_scraped/zachary-taylor.csv'
+test_file_2 <- '../data/presidents_scraped/james-garfield.csv'
+test_file_paths <- c(test_file, test_file_2)
 
 # initialize db if not already created
 db_connect() %>% 
@@ -27,9 +27,8 @@ db_connect() %>%
 # If the token already exists in the text_collocations_set:
 # - add to the 'count' value using the 'count' value from the ngram obj, and increment the 'volume' count by 1
 # - otherwise append the new ngram data including corpus's: president name, year, categories, word count
-update_or_create_ngram <- function(ng, source_df_row) {
+update_or_create_ngram <- function(con, ng, ng_frequency, source_df_row) {
   document_year <- get_document_year(source_df_row$document_date)
-  con <- db_connect()
   existing_ngram <- db_find_ngram_by_year(con, 'ngrams', ng, document_year)
   has_ngram <- nrow(existing_ngram) > 0
   if (has_ngram) {
@@ -57,7 +56,7 @@ update_or_create_ngram <- function(ng, source_df_row) {
           existing_ngram$volume,
         ngram = existing_ngram$ngram,
         year = existing_ngram$year,
-        count = existing_ngram$count + 1,
+        count = existing_ngram$count + ng_frequency,
         categories = merge_values(existing_ngram$categories, source_df_row$categories),
         presidents = merge_values(existing_ngram$presidents, source_df_row$president_name),
         document_uris = merge_values(
@@ -83,7 +82,7 @@ update_or_create_ngram <- function(ng, source_df_row) {
       tibble(
         ngram = ng,
         year = document_year,
-        count = 1,
+        count = ng_frequency,
         volume = 1,
         presidents = source_df_row$president_name,
         categories = source_df_row$categories,
@@ -91,23 +90,25 @@ update_or_create_ngram <- function(ng, source_df_row) {
       )
     )
   }
-  dbDisconnect(con)
 }
 
 collect_and_process_ngrams <-
-  function(file_path, corpus_df) {
+  function(con, file_path, corpus_df) {
     foreach(row = iter(corpus_df, by = 'row')) %do% {
       ngrams <- get_ngrams(row)
-      for (ngram in ngrams[[1]]) {
-        update_or_create_ngram(ngram, row)
+      ngram_frequencies <- as.data.frame(table(ngrams[[1]]))
+      foreach(ngf = iter(ngram_frequencies, by = 'row')) %do% {
+        update_or_create_ngram(con, as.character(ngf$Var1), ngf$Freq, row)
       }
     }
   }
 
 
 # start the tokenizer
+con <- db_connect()
 for (file_path in file_paths) {
   corpus_df <- read_csv(file_path) %>%
     arrange(document_date)
-  collect_and_process_ngrams(path, corpus_df)
+  collect_and_process_ngrams(con, path, corpus_df)
 }
+dbDisconnect(con)
