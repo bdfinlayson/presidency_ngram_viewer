@@ -13,7 +13,7 @@ get_ngrams <- function(row) {
                   case_insensitive = TRUE,
                   min_nchar=3) %>%
     tokens_tolower() %>% 
-    tokens_ngrams(n = 1:4, concatenator = ' ') # google ngrams evaluates 1-5 ngrams
+    tokens_ngrams(n = 2, concatenator = ' ') # google ngrams evaluates 1-5 ngrams
 }
 
 get_document_year <- function(date_string) {
