@@ -11,18 +11,22 @@ build_ngram_df <- function() {
     as.data.frame()
 }
 
-db_connect <- function(path = '../data/ngrams/data.sqlite') {
+db_connect <- function(path = '../data/ngrams/ngrams.sqlite') {
   DBI::dbConnect(RSQLite::SQLite(), dbname = path)
 }
 
-db_create_table <- function(con, table_name, df) {
+db_create_table <- function(con, table_name, df, overwrite = FALSE) {
   if (dbExistsTable(con, table_name)) {
     dbDisconnect(con)
     return()
   }
   
-  dbWriteTable(con, table_name, df, overwrite = TRUE)
-  dbDisconnect(con)
+  dbWriteTable(con, table_name, df, overwrite = overwrite)
+}
+
+db_build_ngram_table_name <- function(president_name, year) {
+  president_last_name <- tolower(word(president_name, -1))
+  paste0(president_last_name, '_', year, '_ngrams')
 }
 
 db_update_ngram <- function(con, table_name, ngram_obj) {

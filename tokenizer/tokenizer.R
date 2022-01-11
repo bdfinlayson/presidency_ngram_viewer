@@ -94,6 +94,26 @@ collect_and_process_ngrams <-
     }
   }
 
+collect_and_process_ngrams_v2 <-
+  function(corpus_df, con, file_path) {
+    president_name <- corpus_df$president_name %>% unique()
+    years <- get_unique_years(corpus_df)
+    for (year in years) {
+      print(c('FETCHING ngrams for', president_name, 'for year', year))
+      ngrams_total <- c()
+      for (month in 1:12) {
+        ngrams <- aggregate_text_for_year_and_month(corpus_df, year, as.character(month)) %>% 
+          get_ngrams(n = 1:5)
+        ngrams_total <- c(ngrams_total[[1]], ngrams[[1]])
+      }
+      ngram_frequencies <- as.data.frame(table(ngrams_total))
+      ngram_frequencies$year <- year
+      ngram_frequencies$president <- president_name
+      ngram_frequencies <- ngram_frequencies %>% mutate(ngram_length = as.integer(str_count(ngrams_total, "\\w+")))    
+      table_name <- db_build_ngram_table_name(president_name, year)
+      db_create_table(con, table_name, ngram_frequencies, overwrite = TRUE)
+    }
+  }
 # test_file <- '../data/presidents_scraped/zachary-taylor.csv'
 # test_file_2 <- '../data/presidents_scraped/james-garfield.csv'
 # test_file_paths <- c(test_file, test_file_2)
@@ -103,13 +123,13 @@ con <- db_connect()
 file_paths <- dir_ls(path = '../data/presidents_scraped')
 
 # initialize db if not already created
-db_connect() %>%
-  db_create_table('ngrams', build_ngram_df())
+# db_connect() %>%
+#  db_create_table('ngrams', build_ngram_df())
 
 # start the tokenizer
 for (file_path in file_paths) {
   read_csv(file_path, lazy = TRUE) %>%
     arrange(document_date) %>%
-    collect_and_process_ngrams(con, path)
+    collect_and_process_ngrams_v2(con, path)
 }
 dbDisconnect(con)
