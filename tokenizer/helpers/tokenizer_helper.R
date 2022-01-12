@@ -26,9 +26,10 @@ get_unique_years <- function(corpus_df) {
 }
 
 aggregate_text_for_year_and_month <- function(corpus_df, year, month) {
-  datetime <- paste0(year, "-", month, "-01 00:00:00")
+  start <- as.POSIXct(strptime(paste0(year, "-", month, "-01 00:00:00"), "%Y-%m-%d %H:%M:%S"))
+  end <- as.POSIXct(strptime(paste0(year, "-", month, "-31 00:00:00"), "%Y-%m-%d %H:%M:%S"))
   corpus_df %>% 
-    filter(document_date >= as.POSIXct(strptime(datetime, "%Y-%m-%d %H:%M:%S"))) %>% 
+    filter(between(document_date, start, end), word_count <= 30000) %>% 
     pull(text_content) %>% 
     str_flatten()
 }

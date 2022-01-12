@@ -99,8 +99,12 @@ collect_and_process_ngrams_v2 <-
     president_name <- corpus_df$president_name %>% unique()
     years <- get_unique_years(corpus_df)
     for (year in years) {
+      table_name <- db_build_ngram_table_name(president_name, year)
+      if (dbExistsTable(con, table_name)) {
+        print(c('TABLE EXISTS', table_name))
+      }
       print(c('FETCHING ngrams for', president_name, 'for year', year))
-      ngrams_total <- c()
+      ngrams_total <- c('')
       for (month in 1:12) {
         ngrams <- aggregate_text_for_year_and_month(corpus_df, year, as.character(month)) %>% 
           get_ngrams(n = 1:5)
@@ -110,7 +114,6 @@ collect_and_process_ngrams_v2 <-
       ngram_frequencies$year <- year
       ngram_frequencies$president <- president_name
       ngram_frequencies <- ngram_frequencies %>% mutate(ngram_length = as.integer(str_count(ngrams_total, "\\w+")))    
-      table_name <- db_build_ngram_table_name(president_name, year)
       db_create_table(con, table_name, ngram_frequencies, overwrite = TRUE)
     }
   }
