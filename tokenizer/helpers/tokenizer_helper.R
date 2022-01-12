@@ -16,11 +16,6 @@ get_ngrams <- function(text_content, n = 2) {
     tokens_ngrams(n = n, concatenator = ' ') # google ngrams evaluates 1-5 ngrams
 }
 
-get_document_year <- function(date_string) {
-  as.POSIXct(date_string, format = "%Y-%m-%d") %>%
-    format(format = "%Y")
-}
-
 get_unique_years <- function(corpus_df) {
   corpus_df$document_date %>% substr(1,4) %>% unique()
 }
@@ -33,27 +28,4 @@ aggregate_text_for_year_and_month <- function(corpus_df, year, month) {
     pull(text_content) 
   text %>% 
     str_flatten()
-}
-
-merge_values <- function(existing_values, new_values) {
-  if (!is.character(existing_values) && !is.character(new_values)) {
-    return('');
-  }
-  if (is.character(existing_values) && !is.character(new_values)) {
-    return(existing_values)
-  }
-  if (!is.character(existing_values) && is.character(new_values)) {
-    return(new_values)
-  }
-  if (nchar(new_values) == 0) {
-    return(existing_values)
-  }
-  if (nchar(existing_values) == 0) {
-    return(new_values)
-  }
-  existing_values_list <-
-    str_split(existing_values, pattern = ';')[[1]]
-  new_values_list <- str_split(new_values, pattern = ';')[[1]]
-  union(existing_values_list, new_values_list) %>%
-    str_flatten(';')
 }
