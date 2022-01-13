@@ -2,6 +2,10 @@ db_connect <- function(path = '../data/ngrams/ngrams.sqlite') {
   DBI::dbConnect(RSQLite::SQLite(), dbname = path)
 }
 
+db_list_tables <- function(con) {
+  dbListTables(con)
+}
+
 db_create_table <- function(con, table_name, df, overwrite = FALSE) {
   if (dbExistsTable(con, table_name)) {
     dbDisconnect(con)
