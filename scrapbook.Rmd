@@ -1,0 +1,28 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r}
+# Libraries
+library(ggplot2)
+library(dplyr)
+library(dbplyr)
+source('./tokenizer/helpers/database_helper.R')
+
+df <- db_connect(path = './data/ngrams/ngrams.sqlite') %>% 
+  tbl('all_ngrams') %>% 
+  as.data.frame()
+
+res <- df %>% 
+  filter(ngram %in% c("injustice", "equal rights"))
+
+# Plot
+plot <- res %>%
+  group_by(year) %>% 
+  ggplot(aes(x=year, y=log(freq, base = 10), group=ngram, color=ngram)) +
+    geom_smooth(method = "loess", se = FALSE)
+
+plot + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+```
