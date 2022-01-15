@@ -10,24 +10,34 @@
 library(shiny)
 
 # Define UI for application that draws a histogram
-shinyUI(fluidPage(
-
-    # Application title
-    titlePanel("Old Faithful Geyser Data"),
-
-    # Sidebar with a slider input for number of bins
-    sidebarLayout(
-        sidebarPanel(
-            sliderInput("bins",
-                        "Number of bins:",
-                        min = 1,
-                        max = 50,
-                        value = 30)
+shinyUI(fluidPage(fluidPage(
+    fluidRow(column(
+        12,
+        h1('Presidential Documents Word Usage Search'),
+        strong(
+            'Discover word usage frequencies by US presidents over time across 146,371 official documents including addresses, correspondence, executive orders, press releases, and more.'
         ),
-
-        # Show a plot of the generated distribution
-        mainPanel(
-            plotOutput("distPlot")
-        )
-    )
-))
+        p()
+    )),
+    fluidRow(column(
+        10,
+        textInput(
+            'ngram_search',
+            label = NULL,
+            value = '',
+            width = '100%',
+            placeholder = 'global warming; climate change'
+        ),
+        em('Separate each search term with a semicolon',
+           align = 'top')
+    ),
+    column(2,
+           submitButton(
+               'Search',
+               icon = icon('search')
+           ))),
+    
+    fluidRow(column(12,
+                    p(),
+                    plotOutput('ngram_line_chart')))
+)))

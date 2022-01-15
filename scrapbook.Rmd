@@ -16,7 +16,7 @@ df <- db_connect(path = './data/ngrams/ngrams.sqlite') %>%
   as.data.frame()
 
 res <- df %>% 
-  filter(ngram %in% c("injustice", "equal rights"))
+  filter(ngram %in% c("injustice", "equal rights", "discrimination"))
 
 # Plot
 plot <- res %>%
@@ -25,4 +25,7 @@ plot <- res %>%
     geom_smooth(method = "loess", se = FALSE)
 
 plot + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+```
+
 ```

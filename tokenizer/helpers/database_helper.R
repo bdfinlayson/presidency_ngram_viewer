@@ -20,6 +20,7 @@ db_build_ngram_table_name <- function(president_name, year) {
   paste0(president_last_name, '_', year, '_ngrams')
 }
 
+# obsolete
 db_find_ngram_by_year <- function(con, table_name, ngram, year) {
   tbl(con, table_name) %>% 
     filter(ngram==ngram, year==year) %>% 
