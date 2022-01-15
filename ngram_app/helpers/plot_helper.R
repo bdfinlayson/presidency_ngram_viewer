@@ -14,7 +14,7 @@ build_empty_plot <- function(text) {
 
 build_ngram_line_plot <- function(df) {
   # build line plot
-  plot <- res %>%
+  plot <- df %>%
     group_by(year) %>%
     ggplot(aes(
       x = year,

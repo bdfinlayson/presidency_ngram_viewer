@@ -9,8 +9,14 @@
 
 library(shiny)
 
+jscode <- '$(document).keyup(function(e) {
+    if (e.key == "Enter") {
+    $("button").click();
+}});'
+
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(fluidPage(
+    tags$head(tags$script(HTML(jscode))),
     fluidRow(column(
         12,
         h1('Presidential Documents Word Usage Search'),
