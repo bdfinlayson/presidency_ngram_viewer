@@ -1,24 +1,18 @@
----
-title: "R Notebook"
-output: html_notebook
----
+build_empty_plot <- function(text) {
+  renderPlot({
+    ggplot() +
+      annotate(
+        "text",
+        x = 4,
+        y = 25,
+        size = 8,
+        label = text
+      ) +
+      theme_void()
+  })
+}
 
-
-```{r}
-# Libraries
-library(ggplot2)
-library(dplyr)
-library(dbplyr)
-source('./tokenizer/helpers/database_helper.R')
-
-df <- db_connect(path = './data/ngrams/ngrams.sqlite') %>% 
-  tbl('all_ngrams') %>% 
-  as.data.frame()
-
-res <- df %>% 
-  filter(ngram %in% c("injustice", "equal rights", "discrimination"))
-
-# Plot
+build_ngram_line_plot <- function(df) {
   # build line plot
   plot <- res %>%
     group_by(year) %>%
@@ -50,9 +44,7 @@ res <- df %>%
   # Set axis labels
   plot <- plot +
     ylab('Log ( frequency of word per year )')
-
-plot
-
-```
-
-```
+  
+  
+  return(plot)
+}
