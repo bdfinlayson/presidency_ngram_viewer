@@ -24,7 +24,7 @@ shinyServer(function(input, output) {
             str_replace_all('; ', ';') %>%
             tolower() %>%
             str_split(';')
-        
+       
         ###################
         ## Render line plot
         ###################
@@ -45,6 +45,7 @@ shinyServer(function(input, output) {
                     progress <- shiny::Progress$new()
                     # Make sure progress closes when reactive exits, even if there's an error
                     on.exit(progress$close())
+ 
                     progress$set(message = "Processing: ", value = 0)
                     
                     # Search for matching terms
@@ -71,6 +72,12 @@ shinyServer(function(input, output) {
         
         output$ngram_details <- renderUI({
             elements <- list()
+            progress <- shiny::Progress$new()
+            # Make sure progress closes when reactive exits, even if there's an error
+            on.exit(progress$close())
+            progress$set(message = "Gathering stats...", value = 0)
+            
+            progress$inc(1 / 1, detail = "Building details...")
             
             if (search_terms[[1]] != '') {
                 index <- 1
@@ -86,13 +93,18 @@ shinyServer(function(input, output) {
                     #                                       term,
                     #                                       order = 'desc')
                     summary <-
-                        ngrams_df %>% filter(ngram == 'climate change') %>% group_by(president) %>% summarize(
+                        ngrams_df %>% filter(ngram == term) %>% group_by(president) %>% summarize(
                             frequency = sum(freq),
                             start_year = min(year),
                             end_year = max(year)
                         )
-                    first_said <- summary %>% arrange(year) %>% head(n = 1) 
-                    last_said <- summary %>% arrange(year) %>% tail(n = 1) 
+                    
+                    if (nrow(summary) == 0) {
+                        next
+                    }
+                    
+                    first_said <- summary %>% arrange(start_year) %>% head(n = 1) 
+                    last_said <- summary %>% arrange(desc(end_year)) %>% head(n = 1) 
                     most_said <- summary %>% arrange(desc(frequency)) %>% head(n = 1)
                     
                     element <- tags$div(
@@ -104,7 +116,6 @@ shinyServer(function(input, output) {
                                 title = 'First To Say:',
                                 president_name = first_said$president,
                                 n_times_said = first_said$frequency,
-                                n_documents = 15,
                                 start_year = first_said$start_year,
                                 end_year = first_said$end_year 
                             ),
@@ -112,7 +123,6 @@ shinyServer(function(input, output) {
                                 title = 'Last To Say:',
                                 president_name = last_said$president,
                                 n_times_said = last_said$frequency,
-                                n_documents = 9,
                                 start_year = last_said$start_year,
                                 end_year = last_said$end_year 
                             ),
@@ -120,7 +130,6 @@ shinyServer(function(input, output) {
                                 title = 'Most Often Said:',
                                 president_name = most_said$president,
                                 n_times_said = most_said$frequency,
-                                n_documents = 53,
                                 start_year = most_said$start_year,
                                 end_year = most_said$end_year
                             )

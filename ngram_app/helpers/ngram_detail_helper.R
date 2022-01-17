@@ -2,7 +2,6 @@ build_ngram_detail_column <-
   function(title = '',
            president_name = '',
            n_times_said = 0,
-           n_documents = 0,
            start_year = 1900,
            end_year = 1900) {
     column(
@@ -16,12 +15,10 @@ build_ngram_detail_column <-
       br(),
       em(president_name),
       br(),
-      strong(str_interp("N times said: ${n_times_said}")),
+      strong(str_interp("Times said: ${n_times_said}")),
       br(),
-      strong(str_interp("N documents: ${n_documents}"),
-             br(),
-             strong(
-               str_interp("Years said: ${start_year} - ${end_year}")
-             ))
+      strong(str_interp(
+        "Years said: ${start_year} - ${end_year}"
+      ))
     )
   }

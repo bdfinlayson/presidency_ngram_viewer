@@ -21,7 +21,7 @@ shinyUI(fluidPage(fluidPage(
         12,
         h1('Presidential Documents Word Usage Search'),
         strong(
-            'Discover word usage frequencies by US presidents over time across 146,371 official documents including addresses, correspondence, executive orders, press releases, and more.'
+            'Discover word usage frequencies by US presidents over time across 118,561 official documents including addresses, correspondence, executive orders, press releases, and more.'
         ),
         p()
     )),
