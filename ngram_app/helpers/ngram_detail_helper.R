@@ -47,7 +47,7 @@ build_ngram_detail_column <-
   }
 
 n_documents <- function(df) {
-  length(unique(result$document_uri))
+  length(unique(df$document_uri))
 }
 
 top_item <- function(items) {

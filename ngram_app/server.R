@@ -93,7 +93,7 @@ shinyServer(function(input, output) {
                     corpuses_first <- db_find_all_ngram_corpuses_by_president(con, term, first_said$president) %>% as.data.frame()
                     corpuses_last <- db_find_all_ngram_corpuses_by_president(con, term, last_said$president) %>% as.data.frame()
                     corpuses_most <- db_find_all_ngram_corpuses_by_president(con, term, most_said$president) %>% as.data.frame()
-                    total_said <- ngrams_df %>% filter(ngram == term) %>% .$freq %>% sum()
+                    total_said <- db_get_total_said(con, term) %>% .$total_said
                     total_documents <- db_find_all_ngram_corpuses(con, term) %>% 
                         .$document_uri %>% 
                         unique() %>% 
@@ -110,7 +110,7 @@ shinyServer(function(input, output) {
                             build_ngram_detail_column(
                                 title = 'First To Say:',
                                 president_name = first_said$president,
-                                n_times_said = first_said$frequency,
+                                n_times_said = db_get_total_said_by_president(con, term, first_said$president) %>% .$total_said,
                                 n_documents = n_documents(corpuses_first),
                                 top_category = top_item(corpuses_first$categories),
                                 top_doc = top_item(corpuses_first$document_uri),
@@ -121,7 +121,7 @@ shinyServer(function(input, output) {
                             build_ngram_detail_column(
                                 title = 'Last To Say:',
                                 president_name = last_said$president,
-                                n_times_said = last_said$frequency,
+                                n_times_said = db_get_total_said_by_president(con, term, last_said$president) %>% .$total_said,
                                 n_documents = n_documents(corpuses_last),
                                 top_category = top_item(corpuses_last$categories),
                                 top_doc = top_item(corpuses_last$document_uri),
@@ -132,7 +132,7 @@ shinyServer(function(input, output) {
                             build_ngram_detail_column(
                                 title = 'Most Often Said:',
                                 president_name = most_said$president,
-                                n_times_said = most_said$frequency,
+                                n_times_said = db_get_total_said_by_president(con, term, most_said$president) %>% .$total_said,
                                 n_documents = n_documents(corpuses_most),
                                 top_category = top_item(corpuses_most$categories),
                                 top_doc = top_item(corpuses_most$document_uri),
