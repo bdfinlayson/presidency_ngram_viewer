@@ -1,12 +1,3 @@
-#
-# This is the server logic of a Shiny web application. You can run the
-# application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
-
 library(shiny)
 library(stringr)
 library(ggplot2)
@@ -46,7 +37,7 @@ shinyServer(function(input, output) {
                     # Make sure progress closes when reactive exits, even if there's an error
                     on.exit(progress$close())
  
-                    progress$set(message = "Processing: ", value = 0)
+                    progress$set(message = ": ", value = 0)
                     
                     # Search for matching terms
                     progress$inc(1 / 2, detail = "Finding matches...")
@@ -75,23 +66,14 @@ shinyServer(function(input, output) {
             progress <- shiny::Progress$new()
             # Make sure progress closes when reactive exits, even if there's an error
             on.exit(progress$close())
-            progress$set(message = "Gathering stats...", value = 0)
+            progress$set(message = "Ngram Details:", value = 0)
             
-            progress$inc(1 / 1, detail = "Building details...")
+            progress$inc(1 / 2, detail = "Gathering stats...")
             
             if (search_terms[[1]] != '') {
+                con <- db_connect(path = './data/ngrams.sqlite')
                 index <- 1
                 for (term in search_terms[[1]]) {
-                    # first_corpus <-
-                    #     db_select_first_corpus_with_ngram(con,
-                    #                                       'all_corpuses',
-                    #                                       term,
-                    #                                       order = 'asc')
-                    # last_corpus <-
-                    #     db_select_first_corpus_with_ngram(con,
-                    #                                       'all_corpuses',
-                    #                                       term,
-                    #                                       order = 'desc')
                     summary <-
                         ngrams_df %>% filter(ngram == term) %>% group_by(president) %>% summarize(
                             frequency = sum(freq),
@@ -107,6 +89,11 @@ shinyServer(function(input, output) {
                     last_said <- summary %>% arrange(desc(end_year)) %>% head(n = 1) 
                     most_said <- summary %>% arrange(desc(frequency)) %>% head(n = 1)
                     
+                    # get additional ngram stats
+                    corpuses_first <- db_find_all_ngram_corpuses(con, term, first_said$president) %>% as.data.frame()
+                    corpuses_last <- db_find_all_ngram_corpuses(con, term, last_said$president) %>% as.data.frame()
+                    corpuses_most <- db_find_all_ngram_corpuses(con, term, most_said$president) %>% as.data.frame()
+                    
                     element <- tags$div(
                         fluidRow(
                             hr(),
@@ -116,6 +103,10 @@ shinyServer(function(input, output) {
                                 title = 'First To Say:',
                                 president_name = first_said$president,
                                 n_times_said = first_said$frequency,
+                                n_documents = n_documents(corpuses_first),
+                                top_category = top_item(corpuses_first$categories),
+                                top_doc = top_item(corpuses_first$document_uri),
+                                top_location = top_item(corpuses_first$location),
                                 start_year = first_said$start_year,
                                 end_year = first_said$end_year 
                             ),
@@ -123,6 +114,10 @@ shinyServer(function(input, output) {
                                 title = 'Last To Say:',
                                 president_name = last_said$president,
                                 n_times_said = last_said$frequency,
+                                n_documents = n_documents(corpuses_last),
+                                top_category = top_item(corpuses_last$categories),
+                                top_doc = top_item(corpuses_last$document_uri),
+                                top_location = top_item(corpuses_last$location),
                                 start_year = last_said$start_year,
                                 end_year = last_said$end_year 
                             ),
@@ -130,6 +125,10 @@ shinyServer(function(input, output) {
                                 title = 'Most Often Said:',
                                 president_name = most_said$president,
                                 n_times_said = most_said$frequency,
+                                n_documents = n_documents(corpuses_most),
+                                top_category = top_item(corpuses_most$categories),
+                                top_doc = top_item(corpuses_most$document_uri),
+                                top_location = top_item(corpuses_most$location),
                                 start_year = most_said$start_year,
                                 end_year = most_said$end_year
                             )
@@ -140,6 +139,8 @@ shinyServer(function(input, output) {
                 }
             }
             
+            progress$inc(2 / 2, detail = "Complete.")
+            dbDisconnect(con)
             return(elements)
         })
     })

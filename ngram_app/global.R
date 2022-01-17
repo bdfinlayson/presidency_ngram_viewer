@@ -8,7 +8,4 @@ con <- db_connect(path = './data/ngrams.sqlite')
 ngrams_df <- tbl(con, 'all_ngrams') %>%
   as.data.frame()
 
-# corpuses_df <- tbl(con, 'all_corpuses') %>%
-#   as.data.frame()
-
 dbDisconnect(con = con)

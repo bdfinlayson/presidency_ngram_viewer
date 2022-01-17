@@ -11,13 +11,16 @@ db_list_presidents <- function(con, table_name) {
   dbGetQuery(con, query)
 }
 
-db_select_first_corpus_with_ngram <-
-  function(con, table_name, ngram, order = 'desc') {
-    query <- str_interp("select * from ${table_name}
-where text_content like '%${ngram}%'
-and categories not like '%fact sheet%'
-order by document_date ${order}
-limit 1;")
+db_find_all_ngram_corpuses <-
+  function(con, ngram, president) {
+    query <-
+      str_interp(
+        "select document_title, document_date, categories, document_uri, word_count, location 
+        from all_corpuses 
+        where president_name == '${president}' 
+        and text_content like '%${ngram}%' 
+        order by document_date desc"
+      )
     
     dbGetQuery(con, query)
   }

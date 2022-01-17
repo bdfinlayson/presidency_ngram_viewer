@@ -59,14 +59,25 @@ plot
 ```{r}
 library(dplyr)
 library(dbplyr)
+library(stringr)
 source('./ngram_app/helpers/database_helper.R')
 source('./ngram_app/helpers/image_helper.R')
 
 con <- db_connect(path = './data/ngrams/ngrams.sqlite')
 
-res <- db_select_first_corpus_with_ngram(con, 'all_corpuses', 'climate change', order = 'desc') %>% 
+result <- db_find_all_ngram_corpuses(con, 'climate change', 'Barack Obama') %>% 
   as.data.frame()
 
-print(res$president_name %>% name_to_url())
+print(length(unique(result$document_title)))
+
+top_categories <- result$categories %>% str_c() %>% str_split(';') %>% unlist() %>% table() %>% as.data.frame() %>% arrange(desc(Freq)) %>% head(n = 3) 
+
+top_documents <- result$document_uri %>% str_c() %>% str_split(';') %>% unlist() %>% table() %>% as.data.frame() %>% arrange(desc(Freq)) %>% head(n = 3) 
+
+print(top_categories['.'])
+print(top_documents['.'])
+
+dbDisconnect(con)
+
 
 ```
