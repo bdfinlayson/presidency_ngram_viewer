@@ -20,19 +20,19 @@ build_ngram_detail_column <-
       em(president_name),
       br(),
       tags$table(
-        tags$tr(tags$td(strong('Times said:')), tags$td(n_times_said)),
-        tags$tr(tags$td(strong('Documents:')), tags$td(n_documents)),
-        tags$tr(tags$td(strong('Years said:')), tags$td(
+        tags$tr(tags$td(strong('Times said: ')), tags$td(n_times_said)),
+        tags$tr(tags$td(strong('Documents: ')), tags$td(n_documents)),
+        tags$tr(tags$td(strong('Years said: ')), tags$td(
           str_interp("${start_year} - ${end_year}")
         )),
         tags$tr(tags$td(strong(
-          'Most freq. category:'
+          'Most freq. category: '
         )), tags$td(top_category)),
         tags$tr(tags$td(strong(
-          'Most freq. location:'
+          'Most freq. location: '
         )), tags$td(if (is.null(top_location)) 'N/A' else top_location)),
         tags$tr(tags$td(strong(
-          'Most freq. document:'
+          'Most freq. document: '
         )), tags$td(
           tags$a(
             href = str_interp('https://www.presidency.ucsb.edu/${top_doc}'),

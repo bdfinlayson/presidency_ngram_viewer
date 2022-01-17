@@ -65,7 +65,7 @@ source('./ngram_app/helpers/image_helper.R')
 
 con <- db_connect(path = './data/ngrams/ngrams.sqlite')
 
-result <- db_find_all_ngram_corpuses(con, 'climate change', 'Barack Obama') %>% 
+result <- db_find_all_ngram_corpuses_by_president(con, 'climate change', 'Barack Obama') %>% 
   as.data.frame()
 
 print(length(unique(result$document_title)))
@@ -73,6 +73,11 @@ print(length(unique(result$document_title)))
 top_categories <- result$categories %>% str_c() %>% str_split(';') %>% unlist() %>% table() %>% as.data.frame() %>% arrange(desc(Freq)) %>% head(n = 3) 
 
 top_documents <- result$document_uri %>% str_c() %>% str_split(';') %>% unlist() %>% table() %>% as.data.frame() %>% arrange(desc(Freq)) %>% head(n = 3) 
+
+total_ngrams <- db_find_all_ngram_corpuses(con, 'climate change') %>% 
+  as.data.frame()
+
+browser()
 
 print(top_categories['.'])
 print(top_documents['.'])

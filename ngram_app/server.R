@@ -74,31 +74,39 @@ shinyServer(function(input, output) {
                 con <- db_connect(path = './data/ngrams.sqlite')
                 index <- 1
                 for (term in search_terms[[1]]) {
-                    summary <-
+                    summary_df <-
                         ngrams_df %>% filter(ngram == term) %>% group_by(president) %>% summarize(
                             frequency = sum(freq),
                             start_year = min(year),
                             end_year = max(year)
                         )
                     
-                    if (nrow(summary) == 0) {
+                    if (nrow(summary_df) == 0) {
                         next
                     }
                     
-                    first_said <- summary %>% arrange(start_year) %>% head(n = 1) 
-                    last_said <- summary %>% arrange(desc(end_year)) %>% head(n = 1) 
-                    most_said <- summary %>% arrange(desc(frequency)) %>% head(n = 1)
+                    first_said <- summary_df %>% arrange(start_year) %>% head(n = 1) 
+                    last_said <- summary_df %>% arrange(desc(end_year)) %>% head(n = 1) 
+                    most_said <- summary_df %>% arrange(desc(frequency)) %>% head(n = 1)
                     
                     # get additional ngram stats
-                    corpuses_first <- db_find_all_ngram_corpuses(con, term, first_said$president) %>% as.data.frame()
-                    corpuses_last <- db_find_all_ngram_corpuses(con, term, last_said$president) %>% as.data.frame()
-                    corpuses_most <- db_find_all_ngram_corpuses(con, term, most_said$president) %>% as.data.frame()
+                    corpuses_first <- db_find_all_ngram_corpuses_by_president(con, term, first_said$president) %>% as.data.frame()
+                    corpuses_last <- db_find_all_ngram_corpuses_by_president(con, term, last_said$president) %>% as.data.frame()
+                    corpuses_most <- db_find_all_ngram_corpuses_by_president(con, term, most_said$president) %>% as.data.frame()
+                    total_said <- ngrams_df %>% filter(ngram == term) %>% .$freq %>% sum()
+                    total_documents <- db_find_all_ngram_corpuses(con, term) %>% 
+                        .$document_uri %>% 
+                        unique() %>% 
+                        length()
                     
                     element <- tags$div(
                         fluidRow(
                             hr(),
                             column(3,
-                                   tags$blockquote(term)),
+                                   tags$blockquote(term),
+                                   strong('Total said: '), tags$span(total_said),
+                                   br(),
+                                   strong('Total documents: '), tags$span(total_documents)),
                             build_ngram_detail_column(
                                 title = 'First To Say:',
                                 president_name = first_said$president,
