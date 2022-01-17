@@ -22,7 +22,7 @@ build_ngram_line_plot <- function(df) {
       group = ngram,
       color = ngram
     )) +
-    geom_smooth(method = "loess", se = FALSE)
+    geom_smooth(method = "loess", se = FALSE, span = 1)
   
   # Set axis styles
   plot <- plot + theme(

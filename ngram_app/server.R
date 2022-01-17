@@ -13,24 +13,23 @@ library(ggplot2)
 library(dplyr)
 library(dbplyr)
 source('./helpers/plot_helper.R')
+source('./helpers/image_helper.R')
+source('./helpers/ngram_detail_helper.R')
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
     observe({
         search_terms <- input$ngram_search %>%
             str_squish() %>%
-            tolower() %>%
-            str_split(';')
-        
-        print(search_terms)
-    })
-    
-    observe({
-        search_terms <- input$ngram_search %>%
-            str_squish() %>%
             str_replace_all('; ', ';') %>%
             tolower() %>%
             str_split(';')
+        
+        ###################
+        ## Render line plot
+        ###################
+        
+        results <- data.frame()
         
         if (search_terms[[1]] == '') {
             text = paste(
@@ -65,5 +64,74 @@ shinyServer(function(input, output) {
                     build_ngram_line_plot(results)
                 })
         }
+        
+        ######################
+        # Render ngram details
+        ######################
+        
+        output$ngram_details <- renderUI({
+            elements <- list()
+            
+            if (search_terms[[1]] != '') {
+                index <- 1
+                for (term in search_terms[[1]]) {
+                    # first_corpus <-
+                    #     db_select_first_corpus_with_ngram(con,
+                    #                                       'all_corpuses',
+                    #                                       term,
+                    #                                       order = 'asc')
+                    # last_corpus <-
+                    #     db_select_first_corpus_with_ngram(con,
+                    #                                       'all_corpuses',
+                    #                                       term,
+                    #                                       order = 'desc')
+                    summary <-
+                        ngrams_df %>% filter(ngram == 'climate change') %>% group_by(president) %>% summarize(
+                            frequency = sum(freq),
+                            start_year = min(year),
+                            end_year = max(year)
+                        )
+                    first_said <- summary %>% arrange(year) %>% head(n = 1) 
+                    last_said <- summary %>% arrange(year) %>% tail(n = 1) 
+                    most_said <- summary %>% arrange(desc(frequency)) %>% head(n = 1)
+                    
+                    element <- tags$div(
+                        fluidRow(
+                            hr(),
+                            column(3,
+                                   tags$blockquote(term)),
+                            build_ngram_detail_column(
+                                title = 'First To Say:',
+                                president_name = first_said$president,
+                                n_times_said = first_said$frequency,
+                                n_documents = 15,
+                                start_year = first_said$start_year,
+                                end_year = first_said$end_year 
+                            ),
+                            build_ngram_detail_column(
+                                title = 'Last To Say:',
+                                president_name = last_said$president,
+                                n_times_said = last_said$frequency,
+                                n_documents = 9,
+                                start_year = last_said$start_year,
+                                end_year = last_said$end_year 
+                            ),
+                            build_ngram_detail_column(
+                                title = 'Most Often Said:',
+                                president_name = most_said$president,
+                                n_times_said = most_said$frequency,
+                                n_documents = 53,
+                                start_year = most_said$start_year,
+                                end_year = most_said$end_year
+                            )
+                        )
+                    )
+                    elements[index] = element$children
+                    index <- index + 1
+                }
+            }
+            
+            return(elements)
+        })
     })
 })

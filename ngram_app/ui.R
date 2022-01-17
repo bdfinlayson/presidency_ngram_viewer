@@ -45,5 +45,8 @@ shinyUI(fluidPage(fluidPage(
     
     fluidRow(column(12,
                     p(),
-                    plotOutput('ngram_line_chart')))
+                    plotOutput('ngram_line_chart'))),
+    fluidRow(column(12,
+                    p(),
+                    htmlOutput('ngram_details')))
 )))

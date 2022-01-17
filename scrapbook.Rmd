@@ -55,4 +55,18 @@ plot
 
 ```
 
+
+```{r}
+library(dplyr)
+library(dbplyr)
+source('./ngram_app/helpers/database_helper.R')
+source('./ngram_app/helpers/image_helper.R')
+
+con <- db_connect(path = './data/ngrams/ngrams.sqlite')
+
+res <- db_select_first_corpus_with_ngram(con, 'all_corpuses', 'climate change', order = 'desc') %>% 
+  as.data.frame()
+
+print(res$president_name %>% name_to_url())
+
 ```
