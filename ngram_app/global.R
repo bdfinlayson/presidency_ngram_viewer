@@ -1,6 +1,7 @@
 library(dplyr)
 library(dbplyr)
 library(stringr)
+library(DBI)
 source('./helpers/database_helper.R')
 
 con <- db_connect(path = './data/ngrams.sqlite')

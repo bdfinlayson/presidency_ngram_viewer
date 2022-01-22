@@ -15,38 +15,62 @@ jscode <- '$(document).keyup(function(e) {
 }});'
 
 # Define UI for application that draws a histogram
-shinyUI(fluidPage(fluidPage(
-    tags$head(tags$script(HTML(jscode))),
-    fluidRow(column(
-        12,
-        h1('Presidential Documents Word Usage Search'),
-        strong(
-            'Discover word usage frequencies by US presidents over time across 118,561 official documents including addresses, correspondence, executive orders, press releases, and more.'
+shinyUI(fluidPage(
+    fluidPage(
+        tags$head(tags$script(HTML(jscode))),
+        fluidRow(column(
+            2,
+            br(),
+            tags$img(
+                src = 'https://upload.wikimedia.org/wikipedia/commons/3/36/Seal_of_the_President_of_the_United_States.svg',
+                height = 100,
+                widgth = 100
+            )
         ),
-        p()
-    )),
-    fluidRow(column(
-        10,
-        textInput(
-            'ngram_search',
-            label = NULL,
-            value = '',
-            width = '100%',
-            placeholder = 'global warming; climate change'
+        column(
+            10,
+            h1('Presidential Documents Word Usage Search'),
+            strong(
+                'Discover word usage frequencies by US presidents over time across 118,561 official documents and transcripts'
+            ),
+            p()
+        )),
+        fluidRow(column(
+            10,
+            br(),
+            textInput(
+                'ngram_search',
+                label = NULL,
+                value = '',
+                width = '100%',
+                placeholder = 'global warming; climate change'
+            ),
+            em('Separate each search term with a semicolon',
+               align = 'top')
         ),
-        em('Separate each search term with a semicolon',
-           align = 'top')
+        column(
+            2,
+            br(),
+            submitButton('Search',
+                         icon = icon('search'))
+        )),
+        
+        fluidRow(column(12,
+                        p(),
+                        plotOutput('ngram_line_chart')))
+
     ),
-    column(2,
-           submitButton(
-               'Search',
-               icon = icon('search')
-           ))),
-    
-    fluidRow(column(12,
-                    p(),
-                    plotOutput('ngram_line_chart'))),
-    fluidRow(column(12,
-                    p(),
-                    htmlOutput('ngram_details')))
+    tabsetPanel(type = 'tabs',
+            tabPanel('Summary',
+                     fluidPage(fluidRow(
+                         column(12,
+                                p(),
+                                htmlOutput('summary'))
+                     ))),
+            tabPanel('Documents',
+                     fluidPage(fluidRow(
+                         column(12,
+                                p(),
+                                htmlOutput('documents'))
+                     )))
 )))
