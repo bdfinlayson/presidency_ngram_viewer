@@ -17,6 +17,7 @@ The primary data source was The American Presidency Project at https://www.presi
 - Citation
 - Document uri
 - Word count
+
 Corpus data totaled 117,374,146 words, which was then tokenized using Quanteda to produce a SQLite database of 7,069,561 n-grams.
 
 This project gathered n-grams 1:5, meaning single words up to 5 word pairs. Leveraged Sqlite’s FST4 extension for full-text search for faster text parsing and to generate the snippets (pictured below).
