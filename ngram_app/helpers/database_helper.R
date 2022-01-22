@@ -18,7 +18,7 @@ db_find_all_ngram_corpuses_by_president <-
         "SELECT DISTINCT document_title, document_date, categories, document_uri, word_count, location 
         from fts4_all_corpuses 
         WHERE president_name == '${president}' 
-        AND text_content MATCH '${escape_quotes(ngram)}'
+        AND text_content MATCH '\"${escape_quotes(ngram)}\"'
         ORDER BY document_date DESC"
       )
     
@@ -31,7 +31,7 @@ db_find_all_ngram_corpuses <-
       str_interp(
         "SELECT DISTINCT document_title, document_date, categories, document_uri, word_count, location
         FROM fts4_all_corpuses 
-        WHERE text_content MATCH '${escape_quotes(ngram)}'
+        WHERE text_content MATCH '\"${escape_quotes(ngram)}\"'
         ORDER BY document_date DESC"
       )
     
@@ -44,7 +44,7 @@ db_count_all_ngram_corpuses <-
       str_interp(
         "SELECT DISTINCT count(document_uri) as total_documents
         FROM fts4_all_corpuses 
-        WHERE text_content MATCH '${escape_quotes(ngram)}'"
+        WHERE text_content MATCH '\"${escape_quotes(ngram)}\"'"
       )
     
     dbGetQuery(con, query)
@@ -64,6 +64,7 @@ db_find_top_documents_by_president <- function(con, ngram, president) {
   dbGetQuery(con, query) 
 }
 
+# not currently used
 db_find_top_category <- function(con, ngram) {
   query <-
     str_interp(

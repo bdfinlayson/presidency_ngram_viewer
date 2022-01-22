@@ -190,9 +190,9 @@ shinyServer(function(input, output) {
                                 start_year = most_said$start_year,
                                 end_year = most_said$end_year
                             ),
-                            br(),
                             hr()
                         ),
+                        br()
                     )
                     elements[index] = element$children
                     index <- index + 1
